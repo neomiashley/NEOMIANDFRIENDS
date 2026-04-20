@@ -88,6 +88,27 @@
   .g-F { background: rgba(200,50,50,0.2); color: #ff8080; }
   .job-yes { color: var(--accent4); font-size: 11px; }
   .job-no  { color: var(--muted); font-size: 11px; }
+
+  /* Student 3 — Stats Section Styles */
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border2); border-radius: var(--radius-sm);
+    padding: 1rem; text-align: center; flex: 1; min-width: 120px;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+  .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+  .stat-sub { font-size: 11px; color: var(--muted); }
+  .stats-grid { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .stats-table-card { background: var(--card); border: 1px solid var(--border2); border-radius: var(--radius-sm); padding: 1rem; }
+  .stats-table-card h4 { font-size: 14px; color: var(--text); margin-bottom: 0.75rem; font-weight: 600; }
+  .stats-row { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; border-bottom: 1px solid var(--border); }
+  .stats-row:last-child { border-bottom: none; }
+  .sr-label { font-size: 13px; color: var(--muted); }
+  .sr-value { font-size: 13px; color: var(--text); font-weight: 500; }
+  .sr-value.highlight { color: var(--accent1); font-weight: 600; }
+  .sr-value.pos { color: var(--collab2); }
+  .sr-value.neg { color: var(--accent4); }
+  .stats-tables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+</style>
 </style>
 </head>
 <body>
@@ -187,6 +208,20 @@
         <div style="height: 300px;"><canvas id="pieChart"></canvas></div>
       </div>
     </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-meta">
+        <h2>Statistical Analysis <span class="owner-tag">Student 3 · Contributor</span></h2>
+        <p>Descriptive Stats &amp; Correlations · branch: feature/statistics</p>
+      </div>
+    </div>
+
+    <div class="stats-grid" id="stats-headline"></div>
+
+    <div class="stats-tables-grid" id="stats-tables"></div>
   </div>
 </div>
 
@@ -430,16 +465,205 @@ function initCharts() {
   drawHistogram(window.DS);
   drawPieChart(window.DS);
 }
- 
+
 /* =====================================================================
-   onDataReady — called once, wires both students' work
+   STUDENT 3 — Statistical Analysis Engine
+   Implements: mean, median, mode, stdDev, variance,
+               pearsonCorr, linearRegression
+===================================================================== */
+ 
+/**
+ * mean(arr) — arithmetic average
+ */
+function mean(arr) {
+  if (!arr || arr.length === 0) return 0;
+  return arr.reduce((sum, v) => sum + v, 0) / arr.length;
+}
+ 
+/**
+ * median(arr) — middle value of sorted array
+ */
+function median(arr) {
+  if (!arr || arr.length === 0) return 0;
+  const sorted = [...arr].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 === 0
+    ? (sorted[mid - 1] + sorted[mid]) / 2
+    : sorted[mid];
+}
+ 
+/**
+ * mode(arr) — most frequently occurring value(s)
+ * Returns a string: single value or comma-separated if multimodal
+ */
+function mode(arr) {
+  if (!arr || arr.length === 0) return "—";
+  const freq = {};
+  arr.forEach(v => { freq[v] = (freq[v] || 0) + 1; });
+  const maxFreq = Math.max(...Object.values(freq));
+  const modes = Object.keys(freq).filter(k => freq[k] === maxFreq).map(Number).sort((a, b) => a - b);
+  // If all values appear equally, consider it "no mode"
+  if (maxFreq === 1) return "No mode";
+  return modes.join(", ");
+}
+ 
+/**
+ * variance(arr) — population variance (σ²)
+ */
+function variance(arr) {
+  if (!arr || arr.length === 0) return 0;
+  const m = mean(arr);
+  return arr.reduce((sum, v) => sum + Math.pow(v - m, 2), 0) / arr.length;
+}
+ 
+/**
+ * stdDev(arr) — population standard deviation (σ)
+ */
+function stdDev(arr) {
+  return Math.sqrt(variance(arr));
+}
+ 
+/**
+ * pearsonCorr(xs, ys) — Pearson correlation coefficient r
+ * Returns value in [-1, 1]
+ */
+function pearsonCorr(xs, ys) {
+  if (!xs || !ys || xs.length !== ys.length || xs.length === 0) return 0;
+  const n  = xs.length;
+  const mx = mean(xs);
+  const my = mean(ys);
+  let num = 0, denomX = 0, denomY = 0;
+  for (let i = 0; i < n; i++) {
+    const dx = xs[i] - mx;
+    const dy = ys[i] - my;
+    num    += dx * dy;
+    denomX += dx * dx;
+    denomY += dy * dy;
+  }
+  const denom = Math.sqrt(denomX * denomY);
+  return denom === 0 ? 0 : num / denom;
+}
+ 
+/**
+ * linearRegression(xs, ys) — Ordinary Least Squares
+ * Returns { slope (m), intercept (b), r2 }
+ */
+function linearRegression(xs, ys) {
+  if (!xs || !ys || xs.length !== ys.length || xs.length === 0) return { slope: 0, intercept: 0, r2: 0 };
+  const n  = xs.length;
+  const mx = mean(xs);
+  const my = mean(ys);
+  let num = 0, denom = 0;
+  for (let i = 0; i < n; i++) {
+    num   += (xs[i] - mx) * (ys[i] - my);
+    denom += Math.pow(xs[i] - mx, 2);
+  }
+  const slope     = denom === 0 ? 0 : num / denom;
+  const intercept = my - slope * mx;
+  const r         = pearsonCorr(xs, ys);
+  const r2        = r * r;
+  return { slope, intercept, r2 };
+}
+ 
+/**
+ * interpretCorrelation(r) — human-readable label for Pearson r
+ */
+function interpretCorrelation(r) {
+  const abs = Math.abs(r);
+  let strength;
+  if (abs >= 0.9)      strength = "Very Strong";
+  else if (abs >= 0.7) strength = "Strong";
+  else if (abs >= 0.5) strength = "Moderate";
+  else if (abs >= 0.3) strength = "Weak";
+  else                 strength = "Very Weak";
+  const direction = r >= 0 ? "Positive" : "Negative";
+  return `${strength} ${direction}`;
+}
+ 
+/**
+ * renderStats(dataset) — compute all stats and inject into the DOM
+ */
+function renderStats(dataset) {
+  const scores      = dataset.map(r => r.final_score);
+  const studyHours  = dataset.map(r => r.study_hours);
+ 
+  // Core descriptive
+  const mn   = mean(scores);
+  const med  = median(scores);
+  const md   = mode(scores);
+  const sd   = stdDev(scores);
+  const vr   = variance(scores);
+  const minS = Math.min(...scores);
+  const maxS = Math.max(...scores);
+  const rng  = maxS - minS;
+  const n    = scores.length;
+ 
+  // Correlation & regression
+  const r    = pearsonCorr(studyHours, scores);
+  const reg  = linearRegression(studyHours, scores);
+  const interp = interpretCorrelation(r);
+  const rClass = r >= 0 ? "pos" : "neg";
+ 
+  // ── Headline stat cards ──
+  document.getElementById("stats-headline").innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">Mean Score</div>
+      <div class="stat-value">${mn.toFixed(2)}</div>
+      <div class="stat-sub">Final Score</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Median Score</div>
+      <div class="stat-value">${med.toFixed(2)}</div>
+      <div class="stat-sub">Final Score</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Std Deviation</div>
+      <div class="stat-value">${sd.toFixed(2)}</div>
+      <div class="stat-sub">Final Score</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Mode</div>
+      <div class="stat-value" style="font-size:1.15rem;padding-top:4px;">${md}</div>
+      <div class="stat-sub">Final Score</div>
+    </div>
+  `;
+ 
+  // ── Detailed tables ──
+  document.getElementById("stats-tables").innerHTML = `
+    <div class="stats-table-card">
+      <h4>Descriptive Statistics — Final Score</h4>
+      <div class="stats-row"><span class="sr-label">Count (n)</span><span class="sr-value highlight">${n}</span></div>
+      <div class="stats-row"><span class="sr-label">Min</span><span class="sr-value">${minS}</span></div>
+      <div class="stats-row"><span class="sr-label">Max</span><span class="sr-value">${maxS}</span></div>
+      <div class="stats-row"><span class="sr-label">Range</span><span class="sr-value">${rng}</span></div>
+      <div class="stats-row"><span class="sr-label">Variance (σ²)</span><span class="sr-value">${vr.toFixed(4)}</span></div>
+      <div class="stats-row"><span class="sr-label">Std Dev (σ)</span><span class="sr-value highlight">${sd.toFixed(4)}</span></div>
+    </div>
+    <div class="stats-table-card">
+      <h4>Correlation &amp; Regression (Study Hours → Score)</h4>
+      <div class="stats-row"><span class="sr-label">Pearson r</span><span class="sr-value ${rClass}">${r.toFixed(4)}</span></div>
+      <div class="stats-row"><span class="sr-label">Interpretation</span><span class="sr-value ${rClass}">${interp}</span></div>
+      <div class="stats-row"><span class="sr-label">Slope (m)</span><span class="sr-value">${reg.slope.toFixed(4)}</span></div>
+      <div class="stats-row"><span class="sr-label">Intercept (b)</span><span class="sr-value">${reg.intercept.toFixed(4)}</span></div>
+      <div class="stats-row"><span class="sr-label">R² (fit quality)</span><span class="sr-value highlight">${reg.r2.toFixed(4)}</span></div>
+      <div class="stats-row"><span class="sr-label">Equation</span><span class="sr-value" style="font-family:monospace;font-size:12px;">y = ${reg.slope.toFixed(2)}x + ${reg.intercept.toFixed(2)}</span></div>
+    </div>
+  `;
+}
+ 
+/* =====================================================================
+   onDataReady — called once DS is set; triggers all dependent sections
 ===================================================================== */
 function onDataReady() {
-  renderTable(loadDataset());
-  initCharts();
+  initCharts();         // Student 2
+  renderStats(window.DS); // Student 3
 }
- 
-onDataReady();
+ 
+/* =====================================================================
+   Init
+===================================================================== */
+renderTable(loadDataset());   // Student 1
+onDataReady();                // Students 2 & 3
 </script>
 </body>
 </html>
