@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>DataSci Collab Dashboard</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<title>Student 1 — Dataset Explorer</title>
 <style>
   :root {
     --bg: #0d0f14;
@@ -17,20 +16,16 @@
     --text: #e8eaf0;
     --muted: #8892a4;
     --accent1: #4f8ef7;
-    --accent2: #38d9a9;
-    --accent3: #f4a94e;
     --accent4: #e06c75;
-    --accent5: #c792ea;
-    --owner: #4f8ef7;
     --collab2: #38d9a9;
-    --collab3: #f4a94e;
+    --accent3: #f4a94e;
+    --accent5: #c792ea;
     --radius: 12px;
     --radius-sm: 8px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
- 
-  /* TOP BAR */
+
   .topbar {
     background: var(--bg2);
     border-bottom: 1px solid var(--border);
@@ -42,16 +37,11 @@
   .topbar-logo span { color: var(--accent1); }
   .topbar-sep { color: var(--border2); font-size: 1.2rem; }
   .branch-badge { background: rgba(79,142,247,0.13); color: var(--accent1); border: 1px solid rgba(79,142,247,0.3); padding: 3px 10px; border-radius: 20px; font-size: 12px; font-family: monospace; }
-  .topbar-right { margin-left: auto; display: flex; gap: 10px; }
-  .avatar { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
-  .av1 { background: rgba(79,142,247,0.25); color: var(--accent1); border: 1.5px solid var(--accent1); }
-  .av2 { background: rgba(56,217,169,0.2); color: var(--collab2); border: 1.5px solid var(--collab2); }
-  .av3 { background: rgba(244,169,78,0.2); color: var(--accent3); border: 1.5px solid var(--accent3); }
- 
-  /* LAYOUT */
-  .page { max-width: 1280px; margin: 0 auto; padding: 2rem; }
- 
-  /* SECTION HEADER */
+  .topbar-right { margin-left: auto; }
+  .avatar { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; background: rgba(79,142,247,0.25); color: var(--accent1); border: 1.5px solid var(--accent1); }
+
+  .page { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
   .section-header {
     display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem;
     border-bottom: 1px solid var(--border);
@@ -59,41 +49,25 @@
   .section-num {
     width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
     font-size: 13px; font-weight: 700; flex-shrink: 0;
+    background: rgba(79,142,247,0.2); color: var(--accent1); border: 1px solid rgba(79,142,247,0.35);
   }
-  .num1 { background: rgba(79,142,247,0.2); color: var(--accent1); border: 1px solid rgba(79,142,247,0.35); }
-  .num2 { background: rgba(56,217,169,0.15); color: var(--collab2); border: 1px solid rgba(56,217,169,0.3); }
-  .num3 { background: rgba(244,169,78,0.15); color: var(--accent3); border: 1px solid rgba(244,169,78,0.3); }
   .section-meta h2 { font-size: 1.15rem; font-weight: 600; color: var(--text); }
   .section-meta p { font-size: 13px; color: var(--muted); margin-top: 2px; }
-  .owner-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 20px; }
-  .ot1 { background: rgba(79,142,247,0.15); color: var(--accent1); }
-  .ot2 { background: rgba(56,217,169,0.12); color: var(--collab2); }
-  .ot3 { background: rgba(244,169,78,0.12); color: var(--accent3); }
- 
-  /* TODO BANNER */
-  .todo-banner {
-    background: rgba(244,169,78,0.08); border: 1px solid rgba(244,169,78,0.25);
-    border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 1.5rem;
-    font-size: 13px; color: #e8c07a; display: flex; gap: 8px; align-items: flex-start;
-  }
-  .todo-banner code { background: rgba(244,169,78,0.2); padding: 1px 5px; border-radius: 4px; font-family: monospace; font-size: 12px; }
- 
-  /* SECTION WRAPPER */
-  .section { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 2rem; }
- 
-  /* ====== SECTION 1 ====== */
+  .owner-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 20px; background: rgba(79,142,247,0.15); color: var(--accent1); }
+
+  .section { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+
   .controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem; }
   .controls select, .controls button {
     background: var(--card); border: 1px solid var(--border2); color: var(--text);
     padding: 6px 12px; border-radius: var(--radius-sm); font-size: 13px; cursor: pointer;
   }
-  .controls select:focus, .controls button:focus { outline: 2px solid var(--accent1); }
-  .controls button { transition: background 0.15s; }
+  .controls select:focus { outline: 2px solid var(--accent1); }
   .controls button:hover { background: var(--card2); }
   .btn-apply { color: var(--accent1) !important; border-color: rgba(79,142,247,0.4) !important; }
   .btn-reset { color: var(--muted) !important; }
   .row-count { margin-left: auto; font-size: 12px; color: var(--muted); }
- 
+
   .table-wrap { overflow-x: auto; border-radius: var(--radius-sm); border: 1px solid var(--border); }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   thead th {
@@ -105,9 +79,7 @@
   tbody tr:last-child { border-bottom: none; }
   tbody tr:hover { background: var(--card); }
   tbody td { padding: 9px 14px; color: var(--text); }
-  .grade-badge {
-    display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;
-  }
+  .grade-badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
   .g-A { background: rgba(56,217,169,0.18); color: var(--collab2); }
   .g-B { background: rgba(79,142,247,0.18); color: var(--accent1); }
   .g-C { background: rgba(244,169,78,0.18); color: var(--accent3); }
@@ -115,91 +87,31 @@
   .g-F { background: rgba(200,50,50,0.2); color: #ff8080; }
   .job-yes { color: var(--accent4); font-size: 11px; }
   .job-no  { color: var(--muted); font-size: 11px; }
- 
-  /* ====== SECTION 2 CHARTS ====== */
-  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-  @media(max-width: 700px) { .chart-grid { grid-template-columns: 1fr; } }
-  .chart-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm);
-    padding: 1rem; display: flex; flex-direction: column; gap: 8px;
-  }
-  .chart-label { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
-  .chart-canvas-wrap { position: relative; height: 220px; }
- 
-  /* ====== SECTION 3 STATS ====== */
-  .stat-hero { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
-  @media(max-width: 700px) { .stat-hero { grid-template-columns: 1fr 1fr; } }
-  .stat-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm);
-    padding: 1rem 1.1rem;
-  }
-  .stat-card .label { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
-  .stat-card .value { font-size: 1.7rem; font-weight: 700; color: var(--text); line-height: 1; }
-  .stat-card .sublabel { font-size: 11px; color: var(--muted); margin-top: 3px; }
-  .v1 { color: var(--accent1) !important; }
-  .v2 { color: var(--collab2) !important; }
-  .v3 { color: var(--accent3) !important; }
-  .v4 { color: var(--accent5) !important; }
- 
-  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-  @media(max-width: 700px) { .stats-grid { grid-template-columns: 1fr; } }
-  .stat-block {
-    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.1rem 1.25rem;
-  }
-  .stat-block h4 { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
-  .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-  .stat-row:last-child { border-bottom: none; }
-  .stat-row .sk { color: var(--muted); }
-  .stat-row .sv { color: var(--text); font-weight: 500; font-family: monospace; }
-  .interp { color: var(--accent2); font-size: 12px; }
- 
-  /* Git branch bar */
-  .git-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .git-chip { display: flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; font-size: 12px; }
-  .git-dot { width: 8px; height: 8px; border-radius: 50%; }
-  .gd1 { background: var(--accent1); }
-  .gd2 { background: var(--collab2); }
-  .gd3 { background: var(--accent3); }
-  .gd-main { background: #888; }
- 
 </style>
 </head>
 <body>
- 
-<!-- TOP BAR -->
+
 <div class="topbar">
   <div class="topbar-logo">⬡ DataSci <span>Collab</span></div>
   <div class="topbar-sep">/</div>
   <div style="font-size:13px;color:var(--muted);">Student Performance Dataset</div>
   <div class="topbar-sep">/</div>
-  <span class="branch-badge">⎇ main</span>
+  <span class="branch-badge">⎇ feature/data-engine</span>
   <div class="topbar-right">
-    <div class="avatar av1" title="Student 1 — Repo Owner">S1</div>
-    <div class="avatar av2" title="Student 2 — Visualizations">S2</div>
-    <div class="avatar av3" title="Student 3 — Statistics">S3</div>
+    <div class="avatar" title="Student 1 — Repo Owner">S1</div>
   </div>
 </div>
- 
+
 <div class="page">
- 
-  <!-- GIT BRANCH INDICATORS -->
-  <div class="git-bar">
-    <div class="git-chip"><div class="git-dot gd-main"></div><span style="color:var(--muted)">main</span></div>
-    <div class="git-chip"><div class="git-dot gd1"></div><span style="color:var(--accent1)">feature/data-engine</span></div>
-    <div class="git-chip"><div class="git-dot gd2"></div><span style="color:var(--collab2)">feature/visualization</span></div>
-    <div class="git-chip"><div class="git-dot gd3"></div><span style="color:var(--accent3)">feature/statistics</span></div>
-  </div>
- 
-  <!-- ===== SECTION 01 ===== -->
   <div class="section">
     <div class="section-header">
-      <div class="section-num num1">01</div>
+      <div class="section-num">01</div>
       <div class="section-meta">
-        <h2>Dataset Explorer <span class="owner-tag ot1">Student 1 · Repo Owner</span></h2>
+        <h2>Dataset Explorer <span class="owner-tag">Student 1 · Repo Owner</span></h2>
         <p>Dataset Engine &amp; Project Setup · branch: feature/data-engine</p>
       </div>
     </div>
- 
+
     <div class="controls">
       <select id="sort-field">
         <option value="">Sort by...</option>
@@ -222,10 +134,10 @@
         <option value="F">F</option>
       </select>
       <button class="btn-apply" onclick="applyFilters()">Apply</button>
-      <button class="btn-reset" onclick="resetFilters()">Reset</button>
+      <button class="btn-reset"  onclick="resetFilters()">Reset</button>
       <span class="row-count" id="row-count">— rows</span>
     </div>
- 
+
     <div class="table-wrap">
       <table id="data-table">
         <thead>
@@ -246,136 +158,71 @@
       </table>
     </div>
   </div>
- 
-  <!-- ===== SECTION 02 ===== -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num num2">02</div>
-      <div class="section-meta">
-        <h2>Visualizations <span class="owner-tag ot2">Student 2 · Collaborator</span></h2>
-        <p>Data Visualization Layer · branch: feature/visualization</p>
-      </div>
-    </div>
- 
-    <div class="chart-grid">
-      <div class="chart-card">
-        <div class="chart-label">Study Hours vs Final Score</div>
-        <div class="chart-canvas-wrap"><canvas id="barChart"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-label">Attendance % vs Final Score</div>
-        <div class="chart-canvas-wrap"><canvas id="scatterChart"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-label">Final Score Distribution</div>
-        <div class="chart-canvas-wrap"><canvas id="histChart"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-label">Grade Distribution</div>
-        <div class="chart-canvas-wrap"><canvas id="pieChart"></canvas></div>
-      </div>
-    </div>
-  </div>
- 
-  <!-- ===== SECTION 03 ===== -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num num3">03</div>
-      <div class="section-meta">
-        <h2>Statistical Analysis <span class="owner-tag ot3">Student 3 · Collaborator</span></h2>
-        <p>Statistical Analysis Engine · branch: feature/statistics</p>
-      </div>
-    </div>
- 
-    <div class="stat-hero">
-      <div class="stat-card"><div class="label">Mean Score</div><div class="value v1" id="st-mean">—</div><div class="sublabel">Final Score</div></div>
-      <div class="stat-card"><div class="label">Median Score</div><div class="value v2" id="st-median">—</div><div class="sublabel">Final Score</div></div>
-      <div class="stat-card"><div class="label">Std Deviation</div><div class="value v3" id="st-std">—</div><div class="sublabel">Final Score</div></div>
-      <div class="stat-card"><div class="label">Mode</div><div class="value v4" id="st-mode">—</div><div class="sublabel">Final Score</div></div>
-    </div>
- 
-    <div class="stats-grid">
-      <div class="stat-block">
-        <h4>Descriptive Statistics — Final Score</h4>
-        <div class="stat-row"><span class="sk">Count (n)</span><span class="sv" id="ds-count">—</span></div>
-        <div class="stat-row"><span class="sk">Min</span><span class="sv" id="ds-min">—</span></div>
-        <div class="stat-row"><span class="sk">Max</span><span class="sv" id="ds-max">—</span></div>
-        <div class="stat-row"><span class="sk">Range</span><span class="sv" id="ds-range">—</span></div>
-        <div class="stat-row"><span class="sk">Variance (σ²)</span><span class="sv" id="ds-variance">—</span></div>
-        <div class="stat-row"><span class="sk">Std Dev (σ)</span><span class="sv" id="ds-stddev">—</span></div>
-      </div>
-      <div class="stat-block">
-        <h4>Correlation &amp; Regression (Study Hours → Score)</h4>
-        <div class="stat-row"><span class="sk">Pearson r</span><span class="sv" id="reg-r">—</span></div>
-        <div class="stat-row"><span class="sk">Interpretation</span><span class="sv interp" id="reg-interp">—</span></div>
-        <div class="stat-row"><span class="sk">Slope (m)</span><span class="sv" id="reg-slope">—</span></div>
-        <div class="stat-row"><span class="sk">Intercept (b)</span><span class="sv" id="reg-intercept">—</span></div>
-        <div class="stat-row"><span class="sk">R² (fit quality)</span><span class="sv" id="reg-r2">—</span></div>
-        <div class="stat-row"><span class="sk">Equation</span><span class="sv" id="reg-eq">—</span></div>
-      </div>
-    </div>
-  </div>
- 
-</div><!-- /page -->
- 
+</div>
+
 <script>
 /* =====================================================================
-   RAW_DATA  (Student 1 provides)
+   RAW_DATA
 ===================================================================== */
 const RAW_DATA = [
-  {name:"Alice Johnson",   study_hours:14, attendance:92, midterm:85, final_score:88, assignments:18, sleep:7,  part_time:false, grade:"A"},
-  {name:"Bob Martinez",    study_hours:8,  attendance:78, midterm:70, final_score:72, assignments:14, sleep:6,  part_time:true,  grade:"C"},
-  {name:"Carol White",     study_hours:20, attendance:98, midterm:94, final_score:96, assignments:20, sleep:8,  part_time:false, grade:"A"},
-  {name:"David Chen",      study_hours:5,  attendance:60, midterm:55, final_score:58, assignments:10, sleep:5,  part_time:true,  grade:"D"},
-  {name:"Emma Davis",      study_hours:12, attendance:88, midterm:80, final_score:82, assignments:17, sleep:7,  part_time:false, grade:"B"},
-  {name:"Frank Wilson",    study_hours:17, attendance:95, midterm:91, final_score:93, assignments:19, sleep:8,  part_time:false, grade:"A"},
-  {name:"Grace Lee",       study_hours:3,  attendance:55, midterm:45, final_score:48, assignments:8,  sleep:4,  part_time:true,  grade:"F"},
-  {name:"Henry Brown",     study_hours:10, attendance:82, midterm:75, final_score:77, assignments:15, sleep:7,  part_time:false, grade:"B"},
-  {name:"Isabella Jones",  study_hours:15, attendance:90, midterm:87, final_score:89, assignments:18, sleep:7,  part_time:false, grade:"A"},
-  {name:"James Taylor",    study_hours:7,  attendance:70, midterm:65, final_score:66, assignments:12, sleep:6,  part_time:true,  grade:"C"},
-  {name:"Karen Garcia",    study_hours:11, attendance:85, midterm:78, final_score:80, assignments:16, sleep:7,  part_time:false, grade:"B"},
-  {name:"Liam Anderson",   study_hours:19, attendance:97, midterm:93, final_score:95, assignments:20, sleep:8,  part_time:false, grade:"A"},
-  {name:"Mia Thomas",      study_hours:6,  attendance:65, midterm:58, final_score:61, assignments:11, sleep:5,  part_time:true,  grade:"D"},
-  {name:"Noah Jackson",    study_hours:13, attendance:87, midterm:82, final_score:84, assignments:17, sleep:7,  part_time:false, grade:"B"},
-  {name:"Olivia Harris",   study_hours:9,  attendance:75, midterm:71, final_score:73, assignments:14, sleep:6,  part_time:true,  grade:"C"},
-  {name:"Paul Martinez",   study_hours:16, attendance:93, midterm:88, final_score:90, assignments:19, sleep:8,  part_time:false, grade:"A"},
-  {name:"Quinn Robinson",  study_hours:4,  attendance:58, midterm:50, final_score:52, assignments:9,  sleep:5,  part_time:true,  grade:"F"},
-  {name:"Rachel Clark",    study_hours:18, attendance:96, midterm:92, final_score:94, assignments:20, sleep:8,  part_time:false, grade:"A"},
-  {name:"Samuel Lewis",    study_hours:11, attendance:83, midterm:77, final_score:79, assignments:15, sleep:7,  part_time:false, grade:"B"},
-  {name:"Taylor Walker",   study_hours:7,  attendance:72, midterm:67, final_score:68, assignments:13, sleep:6,  part_time:true,  grade:"C"},
-  {name:"Uma Hall",        study_hours:14, attendance:91, midterm:84, final_score:86, assignments:18, sleep:7,  part_time:false, grade:"A"},
-  {name:"Victor Allen",    study_hours:2,  attendance:50, midterm:40, final_score:43, assignments:6,  sleep:4,  part_time:true,  grade:"F"},
-  {name:"Wendy Young",     study_hours:15, attendance:89, midterm:86, final_score:88, assignments:18, sleep:7,  part_time:false, grade:"A"},
-  {name:"Xander Hernandez",study_hours:9,  attendance:77, midterm:72, final_score:74, assignments:14, sleep:6,  part_time:false, grade:"C"},
-  {name:"Yara King",       study_hours:12, attendance:86, midterm:81, final_score:83, assignments:16, sleep:7,  part_time:false, grade:"B"},
-  {name:"Zack Wright",     study_hours:6,  attendance:63, midterm:59, final_score:60, assignments:11, sleep:5,  part_time:true,  grade:"D"},
-  {name:"Aiden Lopez",     study_hours:17, attendance:94, midterm:90, final_score:92, assignments:19, sleep:8,  part_time:false, grade:"A"},
-  {name:"Bella Hill",      study_hours:10, attendance:80, midterm:74, final_score:76, assignments:15, sleep:7,  part_time:false, grade:"B"},
-  {name:"Carlos Scott",    study_hours:13, attendance:84, midterm:83, final_score:85, assignments:17, sleep:7,  part_time:false, grade:"A"},
-  {name:"Diana Green",     study_hours:8,  attendance:73, midterm:68, final_score:70, assignments:13, sleep:6,  part_time:true,  grade:"C"},
+  {name:"Alice Johnson",    study_hours:14, attendance:92, midterm:85, final_score:88, assignments:18, sleep:7, part_time:false, grade:"A"},
+  {name:"Bob Martinez",     study_hours:8,  attendance:78, midterm:70, final_score:72, assignments:14, sleep:6, part_time:true,  grade:"C"},
+  {name:"Carol White",      study_hours:20, attendance:98, midterm:94, final_score:96, assignments:20, sleep:8, part_time:false, grade:"A"},
+  {name:"David Chen",       study_hours:5,  attendance:60, midterm:55, final_score:58, assignments:10, sleep:5, part_time:true,  grade:"D"},
+  {name:"Emma Davis",       study_hours:12, attendance:88, midterm:80, final_score:82, assignments:17, sleep:7, part_time:false, grade:"B"},
+  {name:"Frank Wilson",     study_hours:17, attendance:95, midterm:91, final_score:93, assignments:19, sleep:8, part_time:false, grade:"A"},
+  {name:"Grace Lee",        study_hours:3,  attendance:55, midterm:45, final_score:48, assignments:8,  sleep:4, part_time:true,  grade:"F"},
+  {name:"Henry Brown",      study_hours:10, attendance:82, midterm:75, final_score:77, assignments:15, sleep:7, part_time:false, grade:"B"},
+  {name:"Isabella Jones",   study_hours:15, attendance:90, midterm:87, final_score:89, assignments:18, sleep:7, part_time:false, grade:"A"},
+  {name:"James Taylor",     study_hours:7,  attendance:70, midterm:65, final_score:66, assignments:12, sleep:6, part_time:true,  grade:"C"},
+  {name:"Karen Garcia",     study_hours:11, attendance:85, midterm:78, final_score:80, assignments:16, sleep:7, part_time:false, grade:"B"},
+  {name:"Liam Anderson",    study_hours:19, attendance:97, midterm:93, final_score:95, assignments:20, sleep:8, part_time:false, grade:"A"},
+  {name:"Mia Thomas",       study_hours:6,  attendance:65, midterm:58, final_score:61, assignments:11, sleep:5, part_time:true,  grade:"D"},
+  {name:"Noah Jackson",     study_hours:13, attendance:87, midterm:82, final_score:84, assignments:17, sleep:7, part_time:false, grade:"B"},
+  {name:"Olivia Harris",    study_hours:9,  attendance:75, midterm:71, final_score:73, assignments:14, sleep:6, part_time:true,  grade:"C"},
+  {name:"Paul Martinez",    study_hours:16, attendance:93, midterm:88, final_score:90, assignments:19, sleep:8, part_time:false, grade:"A"},
+  {name:"Quinn Robinson",   study_hours:4,  attendance:58, midterm:50, final_score:52, assignments:9,  sleep:5, part_time:true,  grade:"F"},
+  {name:"Rachel Clark",     study_hours:18, attendance:96, midterm:92, final_score:94, assignments:20, sleep:8, part_time:false, grade:"A"},
+  {name:"Samuel Lewis",     study_hours:11, attendance:83, midterm:77, final_score:79, assignments:15, sleep:7, part_time:false, grade:"B"},
+  {name:"Taylor Walker",    study_hours:7,  attendance:72, midterm:67, final_score:68, assignments:13, sleep:6, part_time:true,  grade:"C"},
+  {name:"Uma Hall",         study_hours:14, attendance:91, midterm:84, final_score:86, assignments:18, sleep:7, part_time:false, grade:"A"},
+  {name:"Victor Allen",     study_hours:2,  attendance:50, midterm:40, final_score:43, assignments:6,  sleep:4, part_time:true,  grade:"F"},
+  {name:"Wendy Young",      study_hours:15, attendance:89, midterm:86, final_score:88, assignments:18, sleep:7, part_time:false, grade:"A"},
+  {name:"Xander Hernandez", study_hours:9,  attendance:77, midterm:72, final_score:74, assignments:14, sleep:6, part_time:false, grade:"C"},
+  {name:"Yara King",        study_hours:12, attendance:86, midterm:81, final_score:83, assignments:16, sleep:7, part_time:false, grade:"B"},
+  {name:"Zack Wright",      study_hours:6,  attendance:63, midterm:59, final_score:60, assignments:11, sleep:5, part_time:true,  grade:"D"},
+  {name:"Aiden Lopez",      study_hours:17, attendance:94, midterm:90, final_score:92, assignments:19, sleep:8, part_time:false, grade:"A"},
+  {name:"Bella Hill",       study_hours:10, attendance:80, midterm:74, final_score:76, assignments:15, sleep:7, part_time:false, grade:"B"},
+  {name:"Carlos Scott",     study_hours:13, attendance:84, midterm:83, final_score:85, assignments:17, sleep:7, part_time:false, grade:"A"},
+  {name:"Diana Green",      study_hours:8,  attendance:73, midterm:68, final_score:70, assignments:13, sleep:6, part_time:true,  grade:"C"},
 ];
- 
+
 window.DS = RAW_DATA;
- 
+
 /* =====================================================================
-   STUDENT 1  —  loadDataset(), renderTable(), filter/sort
+   Student 1 — loadDataset()
 ===================================================================== */
 function loadDataset() {
-  return RAW_DATA.map(r => ({...r}));
+  return RAW_DATA.map(r => ({ ...r }));
 }
- 
+
+/* =====================================================================
+   Student 1 — renderTable(data)
+===================================================================== */
 function renderTable(data) {
-  const tbody = document.getElementById("table-body");
+  const tbody    = document.getElementById("table-body");
   const rowCount = document.getElementById("row-count");
+
   if (!data || data.length === 0) {
     tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:2rem;">No data found.</td></tr>`;
     rowCount.textContent = "0 rows";
     return;
   }
+
   rowCount.textContent = data.length + " rows";
   tbody.innerHTML = data.map((r, i) => `
     <tr>
-      <td style="color:var(--muted)">${i+1}</td>
+      <td style="color:var(--muted)">${i + 1}</td>
       <td style="font-weight:500">${r.name}</td>
       <td>${r.study_hours}</td>
       <td>${r.attendance}%</td>
@@ -388,29 +235,43 @@ function renderTable(data) {
     </tr>
   `).join("");
 }
- 
+
+/* =====================================================================
+   Student 1 — Filter & Sort controls
+===================================================================== */
 function applyFilters() {
   let data = loadDataset();
+
   const gradeF = document.getElementById("filter-grade").value;
   const sortF  = document.getElementById("sort-field").value;
   const sortD  = document.getElementById("sort-dir").value;
- 
-  if (gradeF) data = data.filter(r => r.grade === gradeF);
- 
+
+  if (gradeF) {
+    data = data.filter(r => r.grade === gradeF);
+  }
+
   if (sortF) {
     data.sort((a, b) => {
       let av = a[sortF], bv = b[sortF];
-      if (typeof av === "string") av = av.toLowerCase(), bv = bv.toLowerCase();
+      if (typeof av === "string") { av = av.toLowerCase(); bv = bv.toLowerCase(); }
       return sortD === "asc" ? (av > bv ? 1 : -1) : (av < bv ? 1 : -1);
     });
   }
+
   renderTable(data);
 }
- 
+
 function resetFilters() {
-  document.getElementById("sort-field").value = "";
-  document.getElementById("sort-dir").value  = "asc";
+  document.getElementById("sort-field").value   = "";
+  document.getElementById("sort-dir").value     = "asc";
   document.getElementById("filter-grade").value = "";
   renderTable(loadDataset());
 }
- 
+
+/* =====================================================================
+   Init
+===================================================================== */
+renderTable(loadDataset());
+</script>
+</body>
+</html>
