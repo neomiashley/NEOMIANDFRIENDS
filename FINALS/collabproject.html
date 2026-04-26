@@ -959,13 +959,11 @@ function onDataReady() {
  *  4. Update #rowCount with the total number of rows
  */
 function loadDataset() {
-  // TODO: Implement this function
-  // Hint: window.DS = [...RAW_DATA];
-  // Hint: renderTable(window.DS);
-  // Hint: document.getElementById('rowCount').textContent = window.DS.length + ' rows';
-  // Hint: onDataReady();
-
-  console.warn("⚠ Student 1: loadDataset() is not yet implemented.");
+  window.DS = [...RAW_DATA];
+  renderTable(window.DS);
+  document.getElementById('rowCount').textContent = window.DS.length + ' rows';
+  onDataReady();
+  console.log("✅ loadDataset() complete —", window.DS.length, "students loaded.");
 }
 
 /**
@@ -991,14 +989,41 @@ function loadDataset() {
  *    <td class="grade-A">A</td>
  *  </tr>
  */
-function loadDataset() {
-  window.DS = [...RAW_DATA];
-  renderTable(window.DS);
-  document.getElementById('rowCount').textContent = window.DS.length + ' rows';
-  onDataReady();
-  console.log("✅ loadDataset() complete —", window.DS.length, "students loaded.");
-}
+function renderTable(data) {
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
 
+  if (!data || data.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="10" style="text-align:center; color:var(--text-dim);
+            font-family:var(--mono); padding:40px;">
+          ⚠ No results found. Try a different filter.
+        </td>
+      </tr>`;
+    return;
+  }
+
+  data.forEach((student, index) => {
+    const row = document.createElement('tr');
+    const gradeClass = 'grade-' + student.grade;
+    const jobText = student.job ? 'Yes' : 'No';
+
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${student.name}</td>
+      <td class="numeric">${student.studyHours}</td>
+      <td class="numeric">${student.attendance}</td>
+      <td class="numeric">${student.midterm}</td>
+      <td class="numeric">${student.score}</td>
+      <td class="numeric">${student.assignments}</td>
+      <td class="numeric">${student.sleep}</td>
+      <td>${jobText}</td>
+      <td class="${gradeClass}">${student.grade}</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
 /**
  * STUDENT 1 TODO — applyFilterSort()
  *
