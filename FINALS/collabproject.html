@@ -1071,8 +1071,10 @@ function applyFilterSort() {
  *  4. Update #rowCount
  */
 function resetTable() {
-  // TODO: Implement this function
-  console.warn("⚠ Student 1: resetTable() is not yet implemented.");
+  document.getElementById('filterInput').value = '';
+  document.getElementById('sortSelect').value = '';
+  renderTable(window.DS);
+  document.getElementById('rowCount').textContent = window.DS.length + ' rows';
 }
 
 /* Student 1 entry point — runs when DOM is ready */
