@@ -1040,8 +1040,23 @@ function renderTable(data) {
  *  'name' → alphabetical, others → numeric descending
  */
 function applyFilterSort() {
-  // TODO: Implement this function
-  console.warn("⚠ Student 1: applyFilterSort() is not yet implemented.");
+  const filterValue = document.getElementById('filterInput').value.trim().toLowerCase();
+  const sortKey = document.getElementById('sortSelect').value;
+
+  let result = window.DS.filter(student =>
+    student.name.toLowerCase().includes(filterValue)
+  );
+
+  if (sortKey) {
+    result = result.slice().sort((a, b) => {
+      if (sortKey === 'name') return a.name.localeCompare(b.name);
+      if (sortKey === 'grade') return a.grade.localeCompare(b.grade);
+      return b[sortKey] - a[sortKey];
+    });
+  }
+
+  renderTable(result);
+  document.getElementById('rowCount').textContent = result.length + ' rows';
 }
 
 /**
