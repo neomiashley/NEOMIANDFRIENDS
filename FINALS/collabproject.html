@@ -1006,18 +1006,18 @@ function renderTable(data) {
 
   data.forEach((student, index) => {
     const row = document.createElement('tr');
-    const gradeClass = 'grade-' + student.grade;
-    const jobText = student.job ? 'Yes' : 'No';
+    const gradeClass = student.grade ? 'grade-' + student.grade : '';
+    const jobText = student.job === undefined ? '—' : student.job ? 'Yes' : 'No';
 
     row.innerHTML = `
       <td>${index + 1}</td>
       <td>${student.name}</td>
-      <td class="numeric">${student.studyHours}</td>
-      <td class="numeric">${student.attendance}</td>
-      <td class="numeric">${student.midterm}</td>
-      <td class="numeric">${student.score}</td>
-      <td class="numeric">${student.assignments}</td>
-      <td class="numeric">${student.sleep}</td>
+      <td class="numeric">${student.studyHours ?? '—'}</td>
+      <td class="numeric">${student.attendance ?? '—'}</td>
+      <td class="numeric">${student.midterm ?? '—'}</td>
+      <td class="numeric">${student.score ?? '—'}</td>
+      <td class="numeric">${student.assignments ?? '—'}</td>
+      <td class="numeric">${student.sleep ?? '—'}</td>
       <td>${jobText}</td>
       <td class="${gradeClass}">${student.grade}</td>
     `;
