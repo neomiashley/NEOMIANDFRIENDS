@@ -509,6 +509,18 @@
       .stats-grid      { grid-template-columns: repeat(2,1fr); }
       .analysis-row    { grid-template-columns: 1fr; }
     }
+  .table-wrap { 
+  overflow-x: auto; 
+  border-radius: var(--radius); 
+}
+
+.table-wrap { 
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 400px; /* 👈 controls table height */
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
   </style>
 </head>
 <body>
@@ -766,29 +778,45 @@
 /* ─────────────────────────────────────────────────────────────────
    SHARED DATASET (read-only)
 ────────────────────────────────────────────────────────────────── */
-const RAW_DATA = [
-  { name:"Ana Reyes",       studyHours:18, attendance:95, midterm:87, score:91, assignments:10, sleep:7, job:false, grade:"A" },
-  { name:"Ben Santos",      studyHours:10, attendance:78, midterm:65, score:68, assignments:7,  sleep:6, job:true,  grade:"C" },
-  { name:"Clara Tan",       studyHours:22, attendance:98, midterm:94, score:97, assignments:10, sleep:8, job:false, grade:"A" },
-  { name:"Diego Flores",    studyHours:8,  attendance:60, midterm:52, score:55, assignments:5,  sleep:5, job:true,  grade:"D" },
-  { name:"Elena Cruz",      studyHours:15, attendance:88, midterm:78, score:82, assignments:9,  sleep:7, job:false, grade:"B" },
-  { name:"Felix Lim",       studyHours:12, attendance:82, midterm:72, score:75, assignments:8,  sleep:6, job:true,  grade:"C" },
-  { name:"Grace Mendoza",   studyHours:20, attendance:96, midterm:90, score:93, assignments:10, sleep:8, job:false, grade:"A" },
-  { name:"Henry Ong",       studyHours:6,  attendance:55, midterm:45, score:50, assignments:4,  sleep:5, job:true,  grade:"D" },
-  { name:"Iris Villanueva", studyHours:17, attendance:91, midterm:83, score:86, assignments:9,  sleep:7, job:false, grade:"B" },
-  { name:"Jay Aquino",      studyHours:14, attendance:85, midterm:76, score:79, assignments:8,  sleep:7, job:false, grade:"B" },
-  { name:"Karen Delos",     studyHours:9,  attendance:70, midterm:60, score:63, assignments:6,  sleep:6, job:true,  grade:"C" },
-  { name:"Luis Ramos",      studyHours:21, attendance:97, midterm:92, score:95, assignments:10, sleep:8, job:false, grade:"A" },
-  { name:"Maria Dela Cruz", studyHours:16, attendance:89, midterm:80, score:84, assignments:9,  sleep:7, job:true,  grade:"B" },
-  { name:"Noel Bautista",   studyHours:11, attendance:75, midterm:68, score:71, assignments:7,  sleep:6, job:false, grade:"C" },
-  { name:"Olivia Pascual",  studyHours:19, attendance:94, midterm:88, score:90, assignments:10, sleep:8, job:false, grade:"A" },
-  { name:"Paulo Jimenez",   studyHours:7,  attendance:62, midterm:50, score:53, assignments:5,  sleep:5, job:true,  grade:"D" },
-  { name:"Quinn Serrano",   studyHours:13, attendance:80, midterm:73, score:76, assignments:8,  sleep:7, job:false, grade:"C" },
-  { name:"Rosa Aguilar",    studyHours:23, attendance:99, midterm:96, score:98, assignments:10, sleep:9, job:false, grade:"A" },
-  { name:"Sam Torres",      studyHours:10, attendance:74, midterm:66, score:69, assignments:7,  sleep:6, job:true,  grade:"C" },
-  { name:"Tina Guerrero",   studyHours:15, attendance:87, midterm:79, score:81, assignments:9,  sleep:7, job:false, grade:"B" },
-];
- 
+
+function parseCSV(csvText) {
+  const lines = csvText.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim());
+
+  return lines.slice(1).map((line, index) => {
+    const values = line.split(',');
+
+    let raw = {};
+    headers.forEach((header, i) => {
+      let value = values[i];
+
+      // Convert numbers
+      if (!isNaN(value) && value !== '') {
+        value = Number(value);
+      }
+
+      // Convert boolean
+      if (value === 'true') value = true;
+      if (value === 'false') value = false;
+
+      raw[header] = value;
+    });
+
+    // 🔥 TRANSFORM INTO DASHBOARD FORMAT
+    return {
+      name: "Student " + raw.student_id, // no name → create label
+      studyHours: raw.study_hours_per_day,
+      attendance: raw.attendance_percentage,
+      midterm: raw.midterm_score,
+      score: raw.final_exam_score, // IMPORTANT: this is used everywhere
+      assignments: raw.assignment_score,
+      sleep: raw.sleep_hours,
+      job: raw.extra_classes, // closest equivalent
+      grade: raw.grade
+    };
+  });
+}
+
 window.DS    = [];
 window.CHARTS = {};
  
@@ -807,12 +835,25 @@ function onDataReady() {
    STUDENT 1 — DATASET ENGINE & TABLE (branch: feature/data-engine)
 ═══════════════════════════════════════════════════════════════════ */
  
-function loadDataset() {
-  window.DS = [...RAW_DATA];
-  renderTable(window.DS);
-  document.getElementById('rowCount').textContent = window.DS.length + ' rows';
-  onDataReady();
-  console.log("✅ loadDataset() complete —", window.DS.length, "students loaded.");
+async function loadDataset() {
+  try {
+    const response = await fetch('student_performance_data.csv');
+    const text = await response.text();
+
+    const parsedData = parseCSV(text);
+
+    window.DS = parsedData;
+
+    renderTable(window.DS);
+    document.getElementById('rowCount').textContent = window.DS.length + ' rows';
+
+    onDataReady();
+
+    console.log("✅ CSV loaded successfully:", window.DS.length, "rows");
+
+  } catch (error) {
+    console.error("❌ Error loading CSV:", error);
+  }
 }
  
 function renderTable(data) {
