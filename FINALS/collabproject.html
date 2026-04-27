@@ -1134,12 +1134,37 @@ function initCharts() {
  *  - Enable the legend and tooltip
  */
 function drawBarChart(canvasId, data) {
-  // TODO: Implement this function
-  // After implementing, show the canvas:
-  // document.getElementById('barPlaceholder').style.display = 'none';
-  // document.getElementById(canvasId).style.display = 'block';
+  /*
+   * Purpose: Visualizes the relationship between the time a student spends studying and their final score.
+   * Display: A standard bar chart sorted by study hours from lowest to highest.
+   * How it works: Extracts the first name of each student and their final score, sorts the dataset by 'studyHours', and plots the points with a custom 80% opacity amber color.
+   */
+  if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
 
-  console.warn("⚠ Student 2: drawBarChart() is not yet implemented.");
+  const sortedData = [...data].sort((a, b) => a.studyHours - b.studyHours);
+  const labels = sortedData.map(d => d.name.split(' ')[0] + ` (${d.studyHours}h)`);
+  const scores = sortedData.map(d => d.score);
+
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  const options = getChartDefaults();
+  options.scales.y.min = 0;
+  options.scales.y.max = 100;
+
+  window.CHARTS[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Final Score',
+        data: scores,
+        backgroundColor: 'rgba(240, 180, 41, 0.8)' // Amber #f0b429
+      }]
+    },
+    options: options
+  });
+
+  document.getElementById('barPlaceholder').style.display = 'none';
+  document.getElementById(canvasId).style.display = 'block';
 }
 
 /**
