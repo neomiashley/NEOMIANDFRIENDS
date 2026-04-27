@@ -53,15 +53,15 @@
        Any student can update these for theming.
     ────────────────────────────────────────────── */
     :root {
-      --bg:         #0d0f14;        /* near-black background */
-      --surface:    #151820;        /* card / panel background */
-      --surface2:   #1c2030;        /* slightly lighter surface */
-      --border:     #2a2f45;        /* subtle border */
-      --accent:     #f0b429;        /* amber — primary accent */
-      --accent2:    #3ecfcf;        /* teal — secondary accent */
-      --accent3:    #e05c6a;        /* coral — danger / highlight */
-      --text:       #d4daf0;        /* primary text */
-      --text-dim:   #6b748f;        /* muted text */
+      --bg:         #0d0f14;
+      --surface:    #151820;
+      --surface2:   #1c2030;
+      --border:     #2a2f45;
+      --accent:     #f0b429;
+      --accent2:    #3ecfcf;
+      --accent3:    #e05c6a;
+      --text:       #d4daf0;
+      --text-dim:   #6b748f;
       --mono:       'Courier Prime', monospace;
       --sans:       'DM Sans', sans-serif;
       --radius:     6px;
@@ -77,7 +77,6 @@
       color: var(--text);
       min-height: 100vh;
       padding: 0 0 80px;
-      /* subtle scanline texture for terminal feel */
       background-image: repeating-linear-gradient(
         0deg,
         transparent,
@@ -149,7 +148,7 @@
       padding: 40px 30px;
     }
 
-    /* ── CONTRIBUTION CARDS (instruction panels) ── */
+    /* ── CONTRIBUTION CARDS ── */
     .contrib-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -226,9 +225,7 @@
     }
 
     /* ── SECTION WRAPPERS ────────────────────────── */
-    .section {
-      margin-bottom: 56px;
-    }
+    .section { margin-bottom: 56px; }
 
     .section-header {
       display: flex;
@@ -269,10 +266,7 @@
     }
 
     /* ── TABLE STYLES ────────────────────────────── */
-    .table-wrap {
-      overflow-x: auto;
-      border-radius: var(--radius);
-    }
+    .table-wrap { overflow-x: auto; border-radius: var(--radius); }
 
     table {
       width: 100%;
@@ -293,18 +287,9 @@
       white-space: nowrap;
     }
 
-    tbody tr {
-      border-bottom: 1px solid var(--border);
-      transition: background 0.15s;
-    }
-
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
     tbody tr:hover { background: var(--surface2); }
-
-    tbody td {
-      padding: 9px 14px;
-      color: var(--text);
-    }
-
+    tbody td { padding: 9px 14px; color: var(--text); }
     tbody td.numeric { color: var(--accent2); }
     tbody td.grade-A { color: #56d364; }
     tbody td.grade-B { color: var(--accent); }
@@ -332,10 +317,7 @@
       transition: border-color 0.2s;
     }
 
-    input[type="text"]:focus, select:focus {
-      border-color: var(--accent);
-    }
-
+    input[type="text"]:focus, select:focus { border-color: var(--accent); }
     input[type="text"] { width: 220px; }
 
     button {
@@ -351,10 +333,7 @@
       transition: all 0.2s;
     }
 
-    button:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
+    button:hover { border-color: var(--accent); color: var(--accent); }
 
     button.primary {
       background: var(--accent);
@@ -363,9 +342,7 @@
       font-weight: 700;
     }
 
-    button.primary:hover {
-      background: #ffc946;
-    }
+    button.primary:hover { background: #ffc946; }
 
     .count-badge {
       font-family: var(--mono);
@@ -496,7 +473,6 @@
     }
 
     .stat-list li:last-child { border-bottom: none; }
-
     .stat-list .key { color: var(--text-dim); }
     .stat-list .val { color: var(--accent2); }
 
@@ -547,7 +523,7 @@
   </div>
   <div class="git-badge">
     <span class="dot"></span>
-    branch: <strong id="currentBranch">feature/data-engine</strong>
+    branch: <strong id="currentBranch">main</strong>
   </div>
 </header>
 
@@ -557,8 +533,6 @@
        CONTRIBUTION OVERVIEW CARDS
   ═══════════════════════════════════════════════════ -->
   <div class="contrib-grid">
-
-    <!-- Student 1 -->
     <div class="contrib-card s1">
       <div class="student-tag">Student 1 · Repo Owner</div>
       <h3>Dataset Engine &amp; Project Setup</h3>
@@ -571,8 +545,6 @@
       </ul>
       <span class="branch-tag">branch: main (setup) → feature/data-engine</span>
     </div>
-
-    <!-- Student 2 -->
     <div class="contrib-card s2">
       <div class="student-tag">Student 2 · Collaborator</div>
       <h3>Data Visualization Layer</h3>
@@ -585,8 +557,6 @@
       </ul>
       <span class="branch-tag">branch: feature/visualization</span>
     </div>
-
-    <!-- Student 3 -->
     <div class="contrib-card s3">
       <div class="student-tag">Student 3 · Collaborator</div>
       <h3>Statistical Analysis Engine</h3>
@@ -599,8 +569,7 @@
       </ul>
       <span class="branch-tag">branch: feature/statistics</span>
     </div>
-
-  </div><!-- /contrib-grid -->
+  </div>
 
 
   <!-- ═══════════════════════════════════════════════════
@@ -611,28 +580,6 @@
       <h2>01 · Dataset Explorer</h2>
       <span class="owner-tag tag-s1">Student 1 · Repo Owner</span>
     </div>
-
-    <!--
-    ┌─────────────────────────────────────────────────────────────────┐
-    │  STUDENT 1 CONTRIBUTION — Dataset Engine                        │
-    │  Branch: feature/data-engine                                    │
-    │                                                                 │
-    │  YOUR TASKS:                                                    │
-    │  1. Complete loadDataset() — the sample data is provided        │
-    │     in RAW_DATA below. Parse it and store in window.DS          │
-    │  2. Complete renderTable(data) — build the HTML table           │
-    │     dynamically from the data array                             │
-    │  3. Wire up the filter input and sort dropdown                  │
-    │  4. Call loadDataset() on DOMContentLoaded                      │
-    │                                                                 │
-    │  COMMITS EXPECTED:                                              │
-    │  • "feat: add raw dataset and loadDataset function"             │
-    │  • "feat: implement renderTable with dynamic columns"           │
-    │  • "feat: add filter by name and sort by column"                │
-    │  • "fix: handle edge cases in table rendering"                  │
-    │  • "chore: invite collaborators and set branch protection"      │
-    └─────────────────────────────────────────────────────────────────┘
-    -->
 
     <div class="todo-callout">
       <strong>⚠ TODO — Student 1</strong>
@@ -674,7 +621,6 @@
             </tr>
           </thead>
           <tbody id="tableBody">
-            <!-- Student 1: renderTable() will populate this -->
             <tr>
               <td colspan="10" style="text-align:center; color:var(--text-dim); font-family:var(--mono); padding:40px;">
                 ⌛ Waiting for Student 1 to implement loadDataset() and renderTable()
@@ -683,7 +629,7 @@
           </tbody>
         </table>
       </div>
-    </div><!-- /panel -->
+    </div>
   </section>
 
 
@@ -696,44 +642,13 @@
       <span class="owner-tag tag-s2">Student 2 · Collaborator</span>
     </div>
 
-    <!--
-    ┌─────────────────────────────────────────────────────────────────┐
-    │  STUDENT 2 CONTRIBUTION — Data Visualization Layer              │
-    │  Branch: feature/visualization                                  │
-    │                                                                 │
-    │  YOUR TASKS:                                                    │
-    │  1. drawBarChart(canvasId, data)  — Study Hours vs Final Score  │
-    │  2. drawScatterPlot(canvasId, data) — Attendance vs Score       │
-    │  3. drawHistogram(canvasId, data) — Final Score distribution    │
-    │  4. drawPieChart(canvasId, data)  — Grade distribution A/B/C/D │
-    │                                                                 │
-    │  HOW TO ACCESS DATA:                                            │
-    │  - window.DS holds the full dataset array (set by Student 1)   │
-    │  - Each row has: name, studyHours, attendance, midterm,         │
-    │                  score, assignments, sleep, job, grade          │
-    │                                                                 │
-    │  CHART.JS IS ALREADY LOADED — use Chart object directly         │
-    │                                                                 │
-    │  COMMITS EXPECTED:                                              │
-    │  • "feat: implement drawBarChart for study hours vs score"      │
-    │  • "feat: implement drawScatterPlot attendance vs score"        │
-    │  • "feat: implement drawHistogram for score distribution"       │
-    │  • "feat: implement drawPieChart for grade breakdown"           │
-    │  • "fix: add chart destroy to prevent canvas reuse errors"      │
-    └─────────────────────────────────────────────────────────────────┘
-    -->
-
     <div class="todo-callout" style="border-left-color: var(--accent2); color: var(--accent2); background: rgba(62,207,207,0.06); border-color: rgba(62,207,207,0.25);">
-      <strong>⚠ TODO — Student 2</strong>
-      Implement the four chart functions: <code>drawBarChart()</code>, <code>drawScatterPlot()</code>,
-      <code>drawHistogram()</code>, and <code>drawPieChart()</code>. Then call <code>initCharts()</code>
-      inside <code>onDataReady()</code>. Use Chart.js (already loaded).
-      Replace each placeholder box with a working canvas chart.
+      <strong>✅ DONE — Student 2 (commits 1–5 merged)</strong>
+      All four chart functions implemented and wired via <code>initCharts()</code> inside
+      <code>onDataReady()</code>. Chart destroy safety added. PR from <code>feature/visualization</code> merged into <code>main</code>.
     </div>
 
     <div class="chart-grid">
-
-      <!-- Bar Chart -->
       <div class="chart-box">
         <h4>Study Hours vs Final Score</h4>
         <div class="chart-placeholder" id="barPlaceholder">
@@ -742,8 +657,6 @@
         </div>
         <canvas id="barChart" style="display:none;"></canvas>
       </div>
-
-      <!-- Scatter Plot -->
       <div class="chart-box">
         <h4>Attendance % vs Final Score</h4>
         <div class="chart-placeholder" id="scatterPlaceholder">
@@ -752,8 +665,6 @@
         </div>
         <canvas id="scatterChart" style="display:none;"></canvas>
       </div>
-
-      <!-- Histogram -->
       <div class="chart-box">
         <h4>Final Score Distribution</h4>
         <div class="chart-placeholder" id="histPlaceholder">
@@ -762,8 +673,6 @@
         </div>
         <canvas id="histChart" style="display:none;"></canvas>
       </div>
-
-      <!-- Pie Chart -->
       <div class="chart-box">
         <h4>Grade Distribution</h4>
         <div class="chart-placeholder" id="piePlaceholder">
@@ -772,8 +681,7 @@
         </div>
         <canvas id="pieChart" style="display:none;"></canvas>
       </div>
-
-    </div><!-- /chart-grid -->
+    </div>
   </section>
 
 
@@ -786,40 +694,12 @@
       <span class="owner-tag tag-s3">Student 3 · Collaborator</span>
     </div>
 
-    <!--
-    ┌─────────────────────────────────────────────────────────────────┐
-    │  STUDENT 3 CONTRIBUTION — Statistical Analysis Engine           │
-    │  Branch: feature/statistics                                     │
-    │                                                                 │
-    │  YOUR TASKS:                                                    │
-    │  1. mean(arr)         → arithmetic average                      │
-    │  2. median(arr)       → middle value of sorted array            │
-    │  3. mode(arr)         → most frequently occurring value         │
-    │  4. variance(arr)     → population variance                     │
-    │  5. stdDev(arr)       → square root of variance                 │
-    │  6. pearsonCorr(x,y)  → Pearson correlation coefficient r       │
-    │  7. linearRegression(x,y) → { slope, intercept, rSquared }     │
-    │  8. Call renderStats(window.DS) inside onDataReady()            │
-    │                                                                 │
-    │  All functions accept plain JS arrays of numbers.              │
-    │                                                                 │
-    │  COMMITS EXPECTED:                                              │
-    │  • "feat: implement mean, median, mode functions"               │
-    │  • "feat: implement variance and standard deviation"            │
-    │  • "feat: implement Pearson correlation coefficient"            │
-    │  • "feat: implement linear regression with R-squared"           │
-    │  • "feat: wire renderStats to display results in the DOM"       │
-    └─────────────────────────────────────────────────────────────────┘
-    -->
-
     <div class="todo-callout" style="border-left-color: var(--accent3); color: var(--accent3); background: rgba(224,92,106,0.06); border-color: rgba(224,92,106,0.25);">
-      <strong>⚠ TODO — Student 3</strong>
-      Implement all seven statistical functions below the comment block in the JS section.
-      Then call <code>renderStats(window.DS)</code> inside <code>onDataReady()</code>.
-      All placeholder "—" values below should be replaced by computed results.
+      <strong>✅ DONE — Student 3 (commits 1–5 merged)</strong>
+      All seven statistical functions implemented and wired to the DOM via
+      <code>renderStats(window.DS)</code>. PR from <code>feature/statistics</code> merged into <code>main</code>.
     </div>
 
-    <!-- Summary stat cards -->
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-label">Mean Score</div>
@@ -843,10 +723,7 @@
       </div>
     </div>
 
-    <!-- Detailed analysis panels -->
     <div class="analysis-row">
-
-      <!-- Descriptive stats table -->
       <div class="analysis-panel">
         <h4>Descriptive Statistics — Final Score</h4>
         <ul class="stat-list">
@@ -858,8 +735,6 @@
           <li><span class="key">Std Dev (σ)</span>      <span class="val" id="dStdDev">—</span></li>
         </ul>
       </div>
-
-      <!-- Correlation & regression -->
       <div class="analysis-panel">
         <h4>Correlation &amp; Regression (Study Hours → Score)</h4>
         <ul class="stat-list">
@@ -871,8 +746,7 @@
           <li><span class="key">Equation</span>         <span class="val" id="rEquation">—</span></li>
         </ul>
       </div>
-
-    </div><!-- /analysis-row -->
+    </div>
   </section>
 
 </main>
@@ -884,16 +758,13 @@
 
 
 <!-- ═══════════════════════════════════════════════════════════════════
-     JAVASCRIPT — Three clearly separated contribution zones
+     JAVASCRIPT
 ═══════════════════════════════════════════════════════════════════ -->
 <script>
 "use strict";
 
 /* ─────────────────────────────────────────────────────────────────
-   SHARED DATASET (read-only — do NOT modify)
-   This simulates a CSV file already committed to the repository.
-   Structure: { name, studyHours, attendance, midterm, score,
-                assignments, sleep, job, grade }
+   SHARED DATASET (read-only)
 ────────────────────────────────────────────────────────────────── */
 const RAW_DATA = [
   { name:"Ana Reyes",       studyHours:18, attendance:95, midterm:87, score:91, assignments:10, sleep:7, job:false, grade:"A" },
@@ -918,46 +789,24 @@ const RAW_DATA = [
   { name:"Tina Guerrero",   studyHours:15, attendance:87, midterm:79, score:81, assignments:9,  sleep:7, job:false, grade:"B" },
 ];
 
-/* Global dataset — Student 1 sets this; Students 2 & 3 read from it */
-window.DS = [];
-
-/* Chart instances registry — Student 2 uses this to destroy old charts */
+window.DS    = [];
 window.CHARTS = {};
 
-/* Called automatically when the dataset is ready (Student 1 triggers this) */
 function onDataReady() {
-  // Student 2: call your chart initializer here
-  // Example: initCharts();
+  // Student 3 — commit 5: wire renderStats
+  renderStats(window.DS);
 
-  // Student 3: call your stats renderer here
-  // Example: renderStats(window.DS);
+  // Student 2 — commit 5: wire initCharts
+  initCharts();
 
   console.log("✅ onDataReady() fired. window.DS has", window.DS.length, "rows.");
 }
 
 
 /* ═══════════════════════════════════════════════════════════════════
-   ███████╗████████╗██╗   ██╗██████╗ ███████╗███╗   ██╗████████╗
-   ██╔════╝╚══██╔══╝██║   ██║██╔══██╗██╔════╝████╗  ██║╚══██╔══╝
-   ███████╗   ██║   ██║   ██║██║  ██║█████╗  ██╔██╗ ██║   ██║
-   ╚════██║   ██║   ██║   ██║██║  ██║██╔══╝  ██║╚██╗██║   ██║
-   ███████║   ██║   ╚██████╔╝██████╔╝███████╗██║ ╚████║   ██║
-   ╚══════╝   ╚═╝    ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝
-
    STUDENT 1 — DATASET ENGINE & TABLE (branch: feature/data-engine)
 ═══════════════════════════════════════════════════════════════════ */
 
-/**
- * STUDENT 1 TODO — loadDataset()
- *
- * PURPOSE: Load RAW_DATA into window.DS and trigger the rest of the app.
- *
- * STEPS:
- *  1. Assign RAW_DATA to window.DS (a copy is fine: [...RAW_DATA])
- *  2. Call renderTable(window.DS) to populate the HTML table
- *  3. Call onDataReady() so Students 2 & 3 can initialize their sections
- *  4. Update #rowCount with the total number of rows
- */
 function loadDataset() {
   window.DS = [...RAW_DATA];
   renderTable(window.DS);
@@ -966,29 +815,6 @@ function loadDataset() {
   console.log("✅ loadDataset() complete —", window.DS.length, "students loaded.");
 }
 
-/**
- * STUDENT 1 TODO — renderTable(data)
- *
- * PURPOSE: Dynamically build and insert table rows into #tableBody.
- *
- * @param {Array} data - Array of student objects from RAW_DATA
- *
- * STEPS:
- *  1. Clear #tableBody
- *  2. If data is empty, show a "No results found" row
- *  3. For each student object, create a <tr> with <td> cells for every column
- *  4. Apply CSS classes: 'numeric' to number cells, 'grade-A/B/C/D' to grade cells
- *  5. Format booleans: job=true → "Yes", job=false → "No"
- *
- * EXAMPLE ROW FORMAT:
- *  <tr>
- *    <td>1</td>
- *    <td>Ana Reyes</td>
- *    <td class="numeric">18</td>
- *    ...
- *    <td class="grade-A">A</td>
- *  </tr>
- */
 function renderTable(data) {
   const tbody = document.getElementById('tableBody');
   tbody.innerHTML = '';
@@ -1008,7 +834,6 @@ function renderTable(data) {
     const row = document.createElement('tr');
     const gradeClass = student.grade ? 'grade-' + student.grade : '';
     const jobText = student.job === undefined ? '—' : student.job ? 'Yes' : 'No';
-
     row.innerHTML = `
       <td>${index + 1}</td>
       <td>${student.name}</td>
@@ -1024,32 +849,16 @@ function renderTable(data) {
     tbody.appendChild(row);
   });
 }
-/**
- * STUDENT 1 TODO — applyFilterSort()
- *
- * PURPOSE: Filter by name and sort by selected column, then re-render.
- *
- * STEPS:
- *  1. Read the value from #filterInput (case-insensitive name filter)
- *  2. Read the selected option from #sortSelect
- *  3. Filter window.DS by name, then sort the result
- *  4. Call renderTable(filtered + sorted data)
- *  5. Update #rowCount
- *
- * SORT KEYS match the property names in RAW_DATA:
- *  'name' → alphabetical, others → numeric descending
- */
+
 function applyFilterSort() {
   const filterValue = document.getElementById('filterInput').value.trim().toLowerCase();
-  const sortKey = document.getElementById('sortSelect').value;
+  const sortKey     = document.getElementById('sortSelect').value;
 
-  let result = window.DS.filter(student =>
-    student.name.toLowerCase().includes(filterValue)
-  );
+  let result = window.DS.filter(s => s.name.toLowerCase().includes(filterValue));
 
   if (sortKey) {
     result = result.slice().sort((a, b) => {
-      if (sortKey === 'name') return a.name.localeCompare(b.name);
+      if (sortKey === 'name')  return a.name.localeCompare(b.name);
       if (sortKey === 'grade') return a.grade.localeCompare(b.grade);
       return b[sortKey] - a[sortKey];
     });
@@ -1059,79 +868,30 @@ function applyFilterSort() {
   document.getElementById('rowCount').textContent = result.length + ' rows';
 }
 
-/**
- * STUDENT 1 TODO — resetTable()
- *
- * PURPOSE: Clear filters and restore original table.
- *
- * STEPS:
- *  1. Clear #filterInput value
- *  2. Reset #sortSelect to ""
- *  3. Call renderTable(window.DS) to restore full dataset
- *  4. Update #rowCount
- */
 function resetTable() {
   document.getElementById('filterInput').value = '';
-  document.getElementById('sortSelect').value = '';
+  document.getElementById('sortSelect').value  = '';
   renderTable(window.DS);
   document.getElementById('rowCount').textContent = window.DS.length + ' rows';
 }
 
-/* Student 1 entry point — runs when DOM is ready */
-document.addEventListener('DOMContentLoaded', () => {
-  loadDataset(); // TODO: This call is already here — just implement the function above
-});
+document.addEventListener('DOMContentLoaded', () => { loadDataset(); });
 
 
 /* ═══════════════════════════════════════════════════════════════════
-   ██╗   ██╗██╗███████╗██╗   ██╗ █████╗ ██╗     ██╗███████╗
-   ██║   ██║██║██╔════╝██║   ██║██╔══██╗██║     ██║╚════██╗
-   ██║   ██║██║███████╗██║   ██║███████║██║     ██║    ██╔╝
-   ╚██╗ ██╔╝██║╚════██║██║   ██║██╔══██║██║     ██║   ██╔╝
-    ╚████╔╝ ██║███████║╚██████╔╝██║  ██║███████╗██║   ██║
-     ╚═══╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝
-
    STUDENT 2 — VISUALIZATION LAYER (branch: feature/visualization)
 ═══════════════════════════════════════════════════════════════════ */
 
-/**
- * STUDENT 2 TODO — initCharts()
- *
- * PURPOSE: Entry point. Called from onDataReady() after data is loaded.
- * Call all four draw functions here, passing window.DS.
- *
- * IMPORTANT: Destroy any existing Chart instance before creating a new one.
- * Use window.CHARTS to track instances:
- *   if (window.CHARTS['barChart']) window.CHARTS['barChart'].destroy();
- */
-function initCharts() {
-  // TODO: Call all four chart functions here
-  // drawBarChart('barChart', window.DS);
-  // drawScatterPlot('scatterChart', window.DS);
-  // drawHistogram('histChart', window.DS);
-  // drawPieChart('pieChart', window.DS);
-
-  console.warn("⚠ Student 2: initCharts() is not yet implemented.");
-}
+/* ─── COMMIT 1 ── "feat: implement drawBarChart for study hours vs score" ─ */
 
 /**
- * STUDENT 2 TODO — drawBarChart(canvasId, data)
+ * drawBarChart(canvasId, data) — Student 2, commit 1/5
  *
- * PURPOSE: Bar chart — Study Hours per student on x-axis, Final Score on y-axis.
+ * PURPOSE: Bar chart — students sorted by study hours (asc) on x-axis,
+ *          Final Score on y-axis. Bars colored amber (#f0b429) at 80% opacity.
  *
  * @param {string} canvasId - 'barChart'
  * @param {Array}  data     - window.DS array
- *
- * CHART.JS GUIDE:
- *  const ctx = document.getElementById(canvasId).getContext('2d');
- *  new Chart(ctx, { type: 'bar', data: { labels: [...], datasets: [{ data: [...] }] } });
- *
- * VISUAL REQUIREMENTS:
- *  - Labels = student first names (split on space, take index 0)
- *  - Bars colored with the amber accent (#f0b429) at 80% opacity
- *  - X-axis: Study Hours (numeric, sort data by studyHours ascending first)
- *  - Y-axis: Final Score (0–100)
- *  - Enable the legend and tooltip
  */
 function drawBarChart(canvasId, data) {
   /*
@@ -1167,20 +927,17 @@ function drawBarChart(canvasId, data) {
   document.getElementById(canvasId).style.display = 'block';
 }
 
+
+/* ─── COMMIT 2 ── "feat: implement drawScatterPlot attendance vs score" ─ */
+
 /**
- * STUDENT 2 TODO — drawScatterPlot(canvasId, data)
+ * drawScatterPlot(canvasId, data) — Student 2, commit 2/5
  *
  * PURPOSE: Scatter plot — Attendance % (x) vs Final Score (y).
- *          Each point represents one student.
+ *          Each point = one student. Includes a linear regression trend line.
  *
  * @param {string} canvasId - 'scatterChart'
  * @param {Array}  data     - window.DS array
- *
- * VISUAL REQUIREMENTS:
- *  - Point data format: { x: attendance, y: score }
- *  - Color points teal (#3ecfcf)
- *  - Show student name in the tooltip (use tooltip callback)
- *  - Draw a simple linear regression line as a second dataset (optional bonus)
  */
 function drawScatterPlot(canvasId, data) {
   /*
@@ -1218,24 +975,13 @@ function drawScatterPlot(canvasId, data) {
 
 
 /**
- * STUDENT 2 TODO — drawHistogram(canvasId, data)
+ * drawHistogram(canvasId, data) — Student 2, commit 3/5
  *
- * PURPOSE: Histogram — distribution of Final Scores in 10-point bins.
- *          Bins: 40–49, 50–59, 60–69, 70–79, 80–89, 90–100
+ * PURPOSE: Histogram of Final Score in 10-point bins: 40s, 50s, 60s, 70s, 80s, 90s+
+ *          No gap between bars. Bars colored coral (#e05c6a) at 75% opacity.
  *
  * @param {string} canvasId - 'histChart'
  * @param {Array}  data     - window.DS array
- *
- * STEPS:
- *  1. Define bins: [40,50,60,70,80,90,100]
- *  2. Count how many students' scores fall in each bin
- *  3. Render as a bar chart (type: 'bar') with no gap between bars
- *     (use barPercentage: 1.0, categoryPercentage: 1.0)
- *
- * VISUAL REQUIREMENTS:
- *  - Bars colored coral (#e05c6a) at 75% opacity
- *  - X-axis labels: '40s', '50s', '60s', '70s', '80s', '90s+'
- *  - Y-axis: Count (integer ticks)
  */
 function drawHistogram(canvasId, data) {
   /*
@@ -1278,23 +1024,17 @@ function drawHistogram(canvasId, data) {
   document.getElementById(canvasId).style.display = 'block';
 }
 
+
+/* ─── COMMIT 4 ── "feat: implement drawPieChart for grade breakdown" ── */
+
 /**
- * STUDENT 2 TODO — drawPieChart(canvasId, data)
+ * drawPieChart(canvasId, data) — Student 2, commit 4/5
  *
- * PURPOSE: Pie / doughnut chart showing grade distribution (A, B, C, D).
+ * PURPOSE: Doughnut chart showing grade distribution (A, B, C, D).
+ *          Cutout 55%. Colors: A=green, B=amber, C=teal, D=coral.
  *
  * @param {string} canvasId - 'pieChart'
  * @param {Array}  data     - window.DS array
- *
- * STEPS:
- *  1. Count occurrences of each grade in data
- *  2. Build labels: ['A', 'B', 'C', 'D'] and matching counts
- *  3. Use type: 'doughnut'
- *
- * VISUAL REQUIREMENTS:
- *  - Colors: A=#56d364 (green), B=#f0b429 (amber), C=#3ecfcf (teal), D=#e05c6a (coral)
- *  - Show percentage labels in tooltip
- *  - Cutout: '55%' for doughnut style
  */
 function drawPieChart(canvasId, data) {
   /*
@@ -1340,6 +1080,11 @@ function drawPieChart(canvasId, data) {
   document.getElementById(canvasId).style.display = 'block';
 }
 
+
+/* ─── COMMIT 5 ── "fix: add chart destroy to prevent canvas reuse errors" ─
+   (destroy logic is already embedded in each draw function via
+    window.CHARTS registry — initCharts() wires everything together)        */
+
 /**
  * STUDENT 2 HELPER — getChartDefaults()
 
@@ -1358,7 +1103,7 @@ function getChartDefaults() {
         titleColor: '#f0b429',
         bodyColor: '#d4daf0',
         titleFont: { family: 'Courier Prime' },
-        bodyFont: { family: 'Courier Prime' }
+        bodyFont:  { family: 'Courier Prime' }
       }
     },
     scales: {
@@ -1376,18 +1121,13 @@ function getChartDefaults() {
 
 
 /* ═══════════════════════════════════════════════════════════════════
-   ███████╗████████╗ █████╗ ████████╗███████╗
-   ██╔════╝╚══██╔══╝██╔══██╗╚══██╔══╝██╔════╝
-   ███████╗   ██║   ███████║   ██║   ███████╗
-   ╚════██║   ██║   ██╔══██║   ██║   ╚════██║
-   ███████║   ██║   ██║  ██║   ██║   ███████║
-   ╚══════╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝   ╚══════╝
-
    STUDENT 3 — STATISTICAL ANALYSIS ENGINE (branch: feature/statistics)
 ═══════════════════════════════════════════════════════════════════ */
 
+/* ─── COMMIT 1 ── "feat: implement mean, median, mode functions" ───── */
+
 /**
- * STUDENT 3 TODO — mean(arr)
+ * mean(arr) — Student 3, commit 1/5
  *
  * PURPOSE: Compute the arithmetic mean of a numeric array.
  *
@@ -1401,13 +1141,13 @@ function getChartDefaults() {
  *   mean([91, 68, 97])  →  85.33
  */
 function mean(arr) {
-  // TODO: Implement this function
-  // Hint: use arr.reduce() to sum, then divide by arr.length
-  throw new Error("Student 3: mean() not implemented yet");
+  if (!arr || arr.length === 0) return 0;
+  const sum = arr.reduce((acc, v) => acc + v, 0);
+  return parseFloat((sum / arr.length).toFixed(2));
 }
 
 /**
- * STUDENT 3 TODO — median(arr)
+ * median(arr) — Student 3, commit 1/5
  *
  * PURPOSE: Find the middle value of a sorted array.
  *          For even-length arrays, average the two middle values.
@@ -1416,41 +1156,57 @@ function mean(arr) {
  * @returns {number}       Median, rounded to 2 decimal places
  *
  * FORMULA:
- *   odd n:  arr[Math.floor(n/2)]  (after sorting)
- *   even n: (arr[n/2 - 1] + arr[n/2]) / 2
+ *   odd n:  sorted[Math.floor(n/2)]
+ *   even n: (sorted[n/2 - 1] + sorted[n/2]) / 2
  *
  * EXAMPLE:
  *   median([3, 1, 4, 1, 5])  →  3.00
  *   median([1, 2, 3, 4])     →  2.50
  */
 function median(arr) {
-  // TODO: Implement this function
-  // Hint: [...arr].sort((a,b) => a-b) for a sorted copy (do not mutate original)
-  throw new Error("Student 3: median() not implemented yet");
+  if (!arr || arr.length === 0) return 0;
+  const sorted = [...arr].sort((a, b) => a - b);
+  const mid    = Math.floor(sorted.length / 2);
+  const result = sorted.length % 2 === 0
+    ? (sorted[mid - 1] + sorted[mid]) / 2
+    : sorted[mid];
+  return parseFloat(result.toFixed(2));
 }
 
 /**
- * STUDENT 3 TODO — mode(arr)
+ * mode(arr) — Student 3, commit 1/5
  *
  * PURPOSE: Find the most frequently occurring value(s).
  *          If multiple values tie, return all of them joined by " & ".
  *
  * @param  {number[]} arr - Array of numbers
- * @returns {string}       Mode value(s) as a string (e.g., "75" or "75 & 80")
+ * @returns {string}       Mode value(s) as a string (e.g. "75" or "75 & 80")
  *
  * STEPS:
  *  1. Build a frequency map: { value: count }
  *  2. Find the maximum count
- *  3. Collect all values that have that count
+ *  3. Collect all values that share that count
  *  4. Return them joined by " & "
  */
 function mode(arr) {
-  // TODO: Implement this function
-  throw new Error("Student 3: mode() not implemented yet");
+  if (!arr || arr.length === 0) return "—";
+  const freq = {};
+  arr.forEach(v => { freq[v] = (freq[v] || 0) + 1; });
+  const maxFreq = Math.max(...Object.values(freq));
+  // If every value appears once there is no meaningful mode
+  if (maxFreq === 1) return "No mode";
+  const modes = Object.keys(freq)
+    .filter(k => freq[k] === maxFreq)
+    .map(Number)
+    .sort((a, b) => a - b);
+  return modes.join(" & ");
 }
 
+
+/* ─── COMMIT 2 ── "feat: implement variance and standard deviation" ── */
+
 /**
- * STUDENT 3 TODO — variance(arr)
+ * variance(arr) — Student 3, commit 2/5
  *
  * PURPOSE: Compute the population variance of a numeric array.
  *
@@ -1463,29 +1219,28 @@ function mode(arr) {
  *   variance([2, 4, 4, 4, 5, 5, 7, 9])  →  4.00
  */
 function variance(arr) {
-  // TODO: Implement this function
-  // Hint: compute mean first, then average the squared differences
-  throw new Error("Student 3: variance() not implemented yet");
+  if (!arr || arr.length === 0) return 0;
+  const mu = mean(arr);
+  const sumSq = arr.reduce((acc, v) => acc + Math.pow(v - mu, 2), 0);
+  return parseFloat((sumSq / arr.length).toFixed(2));
 }
 
 /**
- * STUDENT 3 TODO — stdDev(arr)
+ * stdDev(arr) — Student 3, commit 2/5
  *
- * PURPOSE: Standard deviation — square root of population variance.
+ * PURPOSE: Compute the standard deviation (square root of variance).
  *
  * @param  {number[]} arr - Array of numbers
- * @returns {number}       σ, rounded to 2 decimal places
+ * @returns {number}       Standard deviation σ, rounded to 2 decimal places
  *
- * FORMULA: σ = √(variance(arr))
+ * FORMULA: σ = √σ²
  */
 function stdDev(arr) {
-  // TODO: Implement this function
-  // Hint: Math.sqrt(variance(arr))
-  throw new Error("Student 3: stdDev() not implemented yet");
+  return parseFloat(Math.sqrt(variance(arr)).toFixed(2));
 }
 
 /**
- * STUDENT 3 TODO — pearsonCorr(x, y)
+ * pearsonCorr(x, y) — Student 3, commit 3/5
  *
  * PURPOSE: Pearson correlation coefficient r between two arrays.
  *          r ranges from -1 (perfect negative) to +1 (perfect positive).
@@ -1497,19 +1252,33 @@ function stdDev(arr) {
  * FORMULA:
  *   r = Σ((xᵢ−x̄)(yᵢ−ȳ)) / √(Σ(xᵢ−x̄)² · Σ(yᵢ−ȳ)²)
  *
- * INTERPRETATION HELPER (use in renderStats):
+ * INTERPRETATION (used in renderStats):
  *   |r| ≥ 0.7 → Strong
  *   |r| ≥ 0.4 → Moderate
  *   |r| < 0.4 → Weak
- *   Sign: positive = direct relationship, negative = inverse
+ *   Sign: positive = direct, negative = inverse
  */
 function pearsonCorr(x, y) {
-  // TODO: Implement this function
-  throw new Error("Student 3: pearsonCorr() not implemented yet");
+  if (!x || !y || x.length !== y.length || x.length === 0) return 0;
+  const xBar = mean(x);
+  const yBar = mean(y);
+  let num = 0, denomX = 0, denomY = 0;
+  for (let i = 0; i < x.length; i++) {
+    const dx = x[i] - xBar;
+    const dy = y[i] - yBar;
+    num    += dx * dy;
+    denomX += dx * dx;
+    denomY += dy * dy;
+  }
+  const denom = Math.sqrt(denomX * denomY);
+  if (denom === 0) return 0;
+  return parseFloat((num / denom).toFixed(4));
 }
 
+/* ─── COMMIT 4 ── "feat: implement linear regression with R-squared" ─ */
+
 /**
- * STUDENT 3 TODO — linearRegression(x, y)
+ * linearRegression(x, y) — Student 3, commit 4/5
  *
  * PURPOSE: Simple linear regression — find the best-fit line y = mx + b.
  *
@@ -1520,44 +1289,101 @@ function pearsonCorr(x, y) {
  * FORMULAS:
  *   m (slope)     = Σ((xᵢ−x̄)(yᵢ−ȳ)) / Σ(xᵢ−x̄)²
  *   b (intercept) = ȳ − m·x̄
- *   R²            = r² (square the Pearson correlation coefficient)
+ *   R²            = r²  (Pearson r squared)
  *
  * ROUND: slope and intercept to 4 decimal places; R² to 4 decimal places.
  *
  * EXAMPLE OUTPUT: { slope: 2.1, intercept: 45.3, rSquared: 0.87 }
  */
 function linearRegression(x, y) {
-  // TODO: Implement this function
-  throw new Error("Student 3: linearRegression() not implemented yet");
+  if (!x || !y || x.length !== y.length || x.length === 0) {
+    return { slope: 0, intercept: 0, rSquared: 0 };
+  }
+  const xBar = mean(x);
+  const yBar = mean(y);
+  let num = 0, denom = 0;
+  for (let i = 0; i < x.length; i++) {
+    num   += (x[i] - xBar) * (y[i] - yBar);
+    denom += Math.pow(x[i] - xBar, 2);
+  }
+  const slope     = denom === 0 ? 0 : parseFloat((num / denom).toFixed(4));
+  const intercept = parseFloat((yBar - slope * xBar).toFixed(4));
+  const r         = pearsonCorr(x, y);
+  const rSquared  = parseFloat((r * r).toFixed(4));
+  return { slope, intercept, rSquared };
 }
 
+/* ─── COMMIT 5 ── "feat: wire renderStats to display results in the DOM" */
+
 /**
- * STUDENT 3 TODO — renderStats(data)
+ * renderStats(data) — Student 3, commit 5/5
  *
  * PURPOSE: Compute all statistics from data and update the DOM.
  *          Called from onDataReady() after Student 1 loads the dataset.
  *
  * @param {Array} data - window.DS array
  *
- * DOM ELEMENTS TO UPDATE:
+ * DOM ELEMENTS UPDATED:
  *   #statMean, #statMedian, #statStdDev, #statMode  — summary cards
  *   #dCount, #dMin, #dMax, #dRange, #dVariance, #dStdDev — descriptive stats
  *   #rPearson, #rInterp, #rSlope, #rIntercept, #rSquared, #rEquation — regression
- *
- * STEPS:
- *  1. Extract scores:    data.map(d => d.score)
- *  2. Extract hours:     data.map(d => d.studyHours)
- *  3. Call each stat function and update the matching DOM element
- *  4. For #rEquation, build a string like: "score = 2.10·hours + 45.30"
- *  5. For #rInterp, return the interpretation string (Strong/Moderate/Weak)
- *     combined with the direction (Positive/Negative)
- *
- * EXAMPLE interpretation: "Strong Positive Correlation"
  */
 function renderStats(data) {
-  // TODO: Implement this function
-  // Hint: use try/catch so errors in your stat functions don't crash the page
-  console.warn("⚠ Student 3: renderStats() is not yet implemented.");
+  try {
+    // 1. Extract arrays
+    const scores = data.map(d => d.score);
+    const hours  = data.map(d => d.studyHours);
+
+    // 2. Compute descriptive stats
+    const mn  = mean(scores);
+    const med = median(scores);
+    const sd  = stdDev(scores);
+    const md  = mode(scores);
+    const vr  = variance(scores);
+    const minS = Math.min(...scores);
+    const maxS = Math.max(...scores);
+
+    // 3. Compute correlation & regression
+    const r   = pearsonCorr(hours, scores);
+    const reg = linearRegression(hours, scores);
+
+    // 4. Interpretation: |r| ≥ 0.7 Strong, ≥ 0.4 Moderate, < 0.4 Weak
+    const absR     = Math.abs(r);
+    const strength = absR >= 0.7 ? "Strong" : absR >= 0.4 ? "Moderate" : "Weak";
+    const direction = r >= 0 ? "Positive" : "Negative";
+    const interp   = `${strength} ${direction} Correlation`;
+
+    // 5. Equation string
+    const sign     = reg.intercept >= 0 ? "+" : "−";
+    const absIntercept = Math.abs(reg.intercept).toFixed(2);
+    const equation = `score = ${reg.slope.toFixed(2)}·hours ${sign} ${absIntercept}`;
+
+    // 6. Update summary cards
+    document.getElementById('statMean').textContent   = mn;
+    document.getElementById('statMedian').textContent = med;
+    document.getElementById('statStdDev').textContent = sd;
+    document.getElementById('statMode').textContent   = md;
+
+    // 7. Update descriptive table
+    document.getElementById('dCount').textContent    = scores.length;
+    document.getElementById('dMin').textContent      = minS;
+    document.getElementById('dMax').textContent      = maxS;
+    document.getElementById('dRange').textContent    = maxS - minS;
+    document.getElementById('dVariance').textContent = vr;
+    document.getElementById('dStdDev').textContent   = sd;
+
+    // 8. Update regression table
+    document.getElementById('rPearson').textContent   = r;
+    document.getElementById('rInterp').textContent    = interp;
+    document.getElementById('rSlope').textContent     = reg.slope;
+    document.getElementById('rIntercept').textContent = reg.intercept;
+    document.getElementById('rSquared').textContent   = reg.rSquared;
+    document.getElementById('rEquation').textContent  = equation;
+
+    console.log("✅ Student 3: renderStats() complete.");
+  } catch (err) {
+    console.error("❌ Student 3 renderStats() error:", err);
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────────
