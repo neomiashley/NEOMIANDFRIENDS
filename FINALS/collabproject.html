@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DataSci Collab — Git Collaborative Project</title>
- 
+
   <!--
   ╔══════════════════════════════════════════════════════════════════════════╗
   ║          DATA SCIENCE COLLABORATIVE GIT PROJECT — INSTRUCTOR COPY       ║
@@ -20,7 +20,7 @@
   ║                                                                          ║
   ║  SEARCH FOR "STUDENT X CONTRIBUTION" COMMENTS TO FIND EACH TASK BLOCK   ║
   ╚══════════════════════════════════════════════════════════════════════════╝
- 
+
   GIT WORKFLOW FOR EACH GROUP:
   ─────────────────────────────
   1. Student 1 creates the GitHub repo and pushes this starter file.
@@ -30,7 +30,7 @@
   5. Each student opens a Pull Request (PR) targeting main.
   6. Another group member reviews and approves the PR before merging.
   7. Resolve any merge conflicts as a team.
- 
+
   GRADING RUBRIC (per student):
   ─────────────────────────────
   ✔ At least 5 meaningful commits on their branch
@@ -39,14 +39,14 @@
   ✔ Functional implementation of their assigned section
   ✔ No broken code merged into main
   -->
- 
+
   <!-- Chart.js — only dependency, loaded from CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
- 
+
   <!-- Google Fonts — Courier Prime for terminal feel, DM Sans for UI -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
- 
+
   <style>
     /* ──────────────────────────────────────────────
        DESIGN TOKENS  (CSS custom properties)
@@ -68,9 +68,9 @@
       --radius-lg:  12px;
       --glow:       0 0 18px rgba(240,180,41,0.25);
     }
- 
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
     body {
       font-family: var(--sans);
       background: var(--bg);
@@ -85,7 +85,7 @@
         rgba(255,255,255,0.013) 4px
       );
     }
- 
+
     /* ── HEADER ─────────────────────────────────── */
     header {
       background: var(--surface);
@@ -99,7 +99,7 @@
       z-index: 100;
       box-shadow: var(--glow);
     }
- 
+
     .header-left h1 {
       font-family: var(--mono);
       font-size: 1.3rem;
@@ -107,14 +107,14 @@
       letter-spacing: 2px;
       text-transform: uppercase;
     }
- 
+
     .header-left p {
       font-size: 0.78rem;
       color: var(--text-dim);
       margin-top: 2px;
       font-family: var(--mono);
     }
- 
+
     .git-badge {
       display: flex;
       align-items: center;
@@ -127,7 +127,7 @@
       font-size: 0.75rem;
       color: var(--accent2);
     }
- 
+
     .git-badge .dot {
       width: 8px;
       height: 8px;
@@ -135,19 +135,19 @@
       background: var(--accent2);
       animation: pulse 2s infinite;
     }
- 
+
     @keyframes pulse {
       0%, 100% { opacity: 1; }
       50%       { opacity: 0.3; }
     }
- 
+
     /* ── MAIN LAYOUT ─────────────────────────────── */
     main {
       max-width: 1300px;
       margin: 0 auto;
       padding: 40px 30px;
     }
- 
+
     /* ── CONTRIBUTION CARDS ── */
     .contrib-grid {
       display: grid;
@@ -155,7 +155,7 @@
       gap: 16px;
       margin-bottom: 50px;
     }
- 
+
     .contrib-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -165,23 +165,23 @@
       overflow: hidden;
       transition: transform 0.2s, box-shadow 0.2s;
     }
- 
+
     .contrib-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 32px rgba(0,0,0,0.4);
     }
- 
+
     .contrib-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
     }
- 
+
     .contrib-card.s1::before { background: var(--accent); }
     .contrib-card.s2::before { background: var(--accent2); }
     .contrib-card.s3::before { background: var(--accent3); }
- 
+
     .contrib-card .student-tag {
       font-family: var(--mono);
       font-size: 0.68rem;
@@ -189,29 +189,29 @@
       text-transform: uppercase;
       margin-bottom: 8px;
     }
- 
+
     .s1 .student-tag { color: var(--accent); }
     .s2 .student-tag { color: var(--accent2); }
     .s3 .student-tag { color: var(--accent3); }
- 
+
     .contrib-card h3 {
       font-size: 0.95rem;
       font-weight: 600;
       margin-bottom: 10px;
     }
- 
+
     .contrib-card ul {
       list-style: none;
       font-size: 0.8rem;
       color: var(--text-dim);
       line-height: 1.7;
     }
- 
+
     .contrib-card ul li::before {
       content: '→ ';
       color: var(--text-dim);
     }
- 
+
     .branch-tag {
       display: inline-block;
       margin-top: 12px;
@@ -223,10 +223,10 @@
       padding: 3px 8px;
       color: var(--text-dim);
     }
- 
+
     /* ── SECTION WRAPPERS ────────────────────────── */
     .section { margin-bottom: 56px; }
- 
+
     .section-header {
       display: flex;
       align-items: baseline;
@@ -235,14 +235,14 @@
       padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
     }
- 
+
     .section-header h2 {
       font-family: var(--mono);
       font-size: 1.05rem;
       letter-spacing: 1px;
       text-transform: uppercase;
     }
- 
+
     .owner-tag {
       font-family: var(--mono);
       font-size: 0.65rem;
@@ -252,11 +252,11 @@
       border-radius: 20px;
       font-weight: 700;
     }
- 
+
     .tag-s1 { background: rgba(240,180,41,0.15);  color: var(--accent);  border: 1px solid rgba(240,180,41,0.3); }
     .tag-s2 { background: rgba(62,207,207,0.15);  color: var(--accent2); border: 1px solid rgba(62,207,207,0.3); }
     .tag-s3 { background: rgba(224,92,106,0.15);  color: var(--accent3); border: 1px solid rgba(224,92,106,0.3); }
- 
+
     /* ── PANEL / CARD ────────────────────────────── */
     .panel {
       background: var(--surface);
@@ -264,17 +264,17 @@
       border-radius: var(--radius-lg);
       padding: 24px;
     }
- 
+
     /* ── TABLE STYLES ────────────────────────────── */
     .table-wrap { overflow-x: auto; border-radius: var(--radius); }
- 
+
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.82rem;
       font-family: var(--mono);
     }
- 
+
     thead th {
       background: var(--surface2);
       color: var(--accent);
@@ -286,7 +286,7 @@
       border-bottom: 2px solid var(--border);
       white-space: nowrap;
     }
- 
+
     tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
     tbody tr:hover { background: var(--surface2); }
     tbody td { padding: 9px 14px; color: var(--text); }
@@ -295,7 +295,7 @@
     tbody td.grade-B { color: var(--accent); }
     tbody td.grade-C { color: var(--accent3); }
     tbody td.grade-D { color: #e05c6a; }
- 
+
     /* ── TOOLBAR ─────────────────────────────────── */
     .toolbar {
       display: flex;
@@ -304,7 +304,7 @@
       flex-wrap: wrap;
       align-items: center;
     }
- 
+
     input[type="text"], select {
       background: var(--surface2);
       border: 1px solid var(--border);
@@ -316,10 +316,10 @@
       outline: none;
       transition: border-color 0.2s;
     }
- 
+
     input[type="text"]:focus, select:focus { border-color: var(--accent); }
     input[type="text"] { width: 220px; }
- 
+
     button {
       background: var(--surface2);
       border: 1px solid var(--border);
@@ -332,39 +332,39 @@
       letter-spacing: 0.5px;
       transition: all 0.2s;
     }
- 
+
     button:hover { border-color: var(--accent); color: var(--accent); }
- 
+
     button.primary {
       background: var(--accent);
       border-color: var(--accent);
       color: #000;
       font-weight: 700;
     }
- 
+
     button.primary:hover { background: #ffc946; }
- 
+
     .count-badge {
       font-family: var(--mono);
       font-size: 0.72rem;
       color: var(--text-dim);
       margin-left: auto;
     }
- 
+
     /* ── CHART GRID ──────────────────────────────── */
     .chart-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
     }
- 
+
     .chart-box {
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 20px;
     }
- 
+
     .chart-box h4 {
       font-family: var(--mono);
       font-size: 0.75rem;
@@ -373,9 +373,9 @@
       text-transform: uppercase;
       margin-bottom: 16px;
     }
- 
+
     .chart-box canvas { max-height: 240px; }
- 
+
     .chart-placeholder {
       height: 200px;
       display: flex;
@@ -389,9 +389,9 @@
       border: 2px dashed var(--border);
       border-radius: var(--radius);
     }
- 
+
     .chart-placeholder span { font-size: 2rem; }
- 
+
     /* ── STATS GRID ──────────────────────────────── */
     .stats-grid {
       display: grid;
@@ -399,7 +399,7 @@
       gap: 14px;
       margin-bottom: 24px;
     }
- 
+
     .stat-card {
       background: var(--surface2);
       border: 1px solid var(--border);
@@ -407,7 +407,7 @@
       padding: 16px;
       text-align: center;
     }
- 
+
     .stat-card .stat-label {
       font-family: var(--mono);
       font-size: 0.65rem;
@@ -416,40 +416,40 @@
       text-transform: uppercase;
       margin-bottom: 8px;
     }
- 
+
     .stat-card .stat-value {
       font-family: var(--mono);
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--accent3);
     }
- 
+
     .stat-card .stat-sub {
       font-size: 0.7rem;
       color: var(--text-dim);
       margin-top: 4px;
     }
- 
+
     .stat-placeholder {
       font-family: var(--mono);
       font-size: 1.2rem;
       color: var(--border);
     }
- 
+
     /* ── ANALYSIS TABLE ──────────────────────────── */
     .analysis-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
     }
- 
+
     .analysis-panel {
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 18px;
     }
- 
+
     .analysis-panel h4 {
       font-family: var(--mono);
       font-size: 0.72rem;
@@ -458,24 +458,24 @@
       text-transform: uppercase;
       margin-bottom: 14px;
     }
- 
+
     .stat-list {
       list-style: none;
       font-family: var(--mono);
       font-size: 0.82rem;
     }
- 
+
     .stat-list li {
       display: flex;
       justify-content: space-between;
       padding: 7px 0;
       border-bottom: 1px solid var(--border);
     }
- 
+
     .stat-list li:last-child { border-bottom: none; }
     .stat-list .key { color: var(--text-dim); }
     .stat-list .val { color: var(--accent2); }
- 
+
     /* ── TODO CALLOUT ────────────────────────────── */
     .todo-callout {
       background: rgba(240,180,41,0.08);
@@ -489,9 +489,9 @@
       margin-bottom: 20px;
       line-height: 1.7;
     }
- 
+
     .todo-callout strong { display: block; margin-bottom: 4px; font-size: 0.72rem; letter-spacing: 1px; }
- 
+
     /* ── FOOTER ──────────────────────────────────── */
     footer {
       text-align: center;
@@ -501,7 +501,7 @@
       color: var(--text-dim);
       letter-spacing: 1px;
     }
- 
+
     /* ── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 900px) {
       .contrib-grid    { grid-template-columns: 1fr; }
@@ -524,7 +524,7 @@
   </style>
 </head>
 <body>
- 
+
 <!-- ═══════════════════════════════════════════════════════
      HEADER
 ═══════════════════════════════════════════════════════ -->
@@ -538,9 +538,9 @@
     branch: <strong id="currentBranch">main</strong>
   </div>
 </header>
- 
+
 <main>
- 
+
   <!-- ═══════════════════════════════════════════════════
        CONTRIBUTION OVERVIEW CARDS
   ═══════════════════════════════════════════════════ -->
@@ -582,8 +582,8 @@
       <span class="branch-tag">branch: feature/statistics</span>
     </div>
   </div>
- 
- 
+
+
   <!-- ═══════════════════════════════════════════════════
        SECTION 1 — DATASET & TABLE  (STUDENT 1)
   ═══════════════════════════════════════════════════ -->
@@ -592,14 +592,14 @@
       <h2>01 · Dataset Explorer</h2>
       <span class="owner-tag tag-s1">Student 1 · Repo Owner</span>
     </div>
- 
+
     <div class="todo-callout">
       <strong>⚠ TODO — Student 1</strong>
       Implement the three functions marked below: <code>loadDataset()</code>, <code>renderTable(data)</code>,
       and wire the filter/sort controls. The raw dataset object (RAW_DATA) is already provided.
       After completion, commit and open your PR to main.
     </div>
- 
+
     <div class="panel">
       <div class="toolbar">
         <input type="text" id="filterInput" placeholder="Filter by student name..." />
@@ -615,7 +615,7 @@
         <button onclick="resetTable()">Reset</button>
         <span class="count-badge" id="rowCount">— rows</span>
       </div>
- 
+
       <div class="table-wrap">
         <table id="dataTable">
           <thead>
@@ -643,8 +643,8 @@
       </div>
     </div>
   </section>
- 
- 
+
+
   <!-- ═══════════════════════════════════════════════════
        SECTION 2 — VISUALIZATIONS  (STUDENT 2)
   ═══════════════════════════════════════════════════ -->
@@ -653,13 +653,13 @@
       <h2>02 · Visualizations</h2>
       <span class="owner-tag tag-s2">Student 2 · Collaborator</span>
     </div>
- 
+
     <div class="todo-callout" style="border-left-color: var(--accent2); color: var(--accent2); background: rgba(62,207,207,0.06); border-color: rgba(62,207,207,0.25);">
       <strong>✅ DONE — Student 2 (commits 1–5 merged)</strong>
       All four chart functions implemented and wired via <code>initCharts()</code> inside
       <code>onDataReady()</code>. Chart destroy safety added. PR from <code>feature/visualization</code> merged into <code>main</code>.
     </div>
- 
+
     <div class="chart-grid">
       <div class="chart-box">
         <h4>Study Hours vs Final Score</h4>
@@ -695,8 +695,8 @@
       </div>
     </div>
   </section>
- 
- 
+
+
   <!-- ═══════════════════════════════════════════════════
        SECTION 3 — STATISTICS  (STUDENT 3)
   ═══════════════════════════════════════════════════ -->
@@ -705,13 +705,13 @@
       <h2>03 · Statistical Analysis</h2>
       <span class="owner-tag tag-s3">Student 3 · Collaborator</span>
     </div>
- 
+
     <div class="todo-callout" style="border-left-color: var(--accent3); color: var(--accent3); background: rgba(224,92,106,0.06); border-color: rgba(224,92,106,0.25);">
       <strong>✅ DONE — Student 3 (commits 1–5 merged)</strong>
       All seven statistical functions implemented and wired to the DOM via
       <code>renderStats(window.DS)</code>. PR from <code>feature/statistics</code> merged into <code>main</code>.
     </div>
- 
+
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-label">Mean Score</div>
@@ -734,7 +734,7 @@
         <div class="stat-sub">Final Score</div>
       </div>
     </div>
- 
+
     <div class="analysis-row">
       <div class="analysis-panel">
         <h4>Descriptive Statistics — Final Score</h4>
@@ -760,21 +760,21 @@
       </div>
     </div>
   </section>
- 
+
 </main>
- 
+
 <footer>
   DS COLLAB PROJECT · COMPUTER SCIENCE DEPT · GIT COLLABORATIVE ACTIVITY
   <br>Each student's contribution is tracked via commits, branches, and pull requests.
 </footer>
- 
- 
+
+
 <!-- ═══════════════════════════════════════════════════════════════════
      JAVASCRIPT
 ═══════════════════════════════════════════════════════════════════ -->
 <script>
 "use strict";
- 
+
 /* ─────────────────────────────────────────────────────────────────
    SHARED DATASET (read-only)
 ────────────────────────────────────────────────────────────────── */
@@ -819,18 +819,18 @@ function parseCSV(csvText) {
 
 window.DS    = [];
 window.CHARTS = {};
- 
+
 function onDataReady() {
   // Student 3 — commit 5: wire renderStats
   renderStats(window.DS);
- 
+
   // Student 2 — commit 5: wire initCharts
   initCharts();
- 
+
   console.log("✅ onDataReady() fired. window.DS has", window.DS.length, "rows.");
 }
- 
- 
+
+
 /* ═══════════════════════════════════════════════════════════════════
    STUDENT 1 — DATASET ENGINE & TABLE (branch: feature/data-engine)
 ═══════════════════════════════════════════════════════════════════ */
@@ -855,11 +855,11 @@ async function loadDataset() {
     console.error("❌ Error loading CSV:", error);
   }
 }
- 
+
 function renderTable(data) {
   const tbody = document.getElementById('tableBody');
   tbody.innerHTML = '';
- 
+
   if (!data || data.length === 0) {
     tbody.innerHTML = `
       <tr>
@@ -870,7 +870,7 @@ function renderTable(data) {
       </tr>`;
     return;
   }
- 
+
   data.forEach((student, index) => {
     const row = document.createElement('tr');
     const gradeClass = student.grade ? 'grade-' + student.grade : '';
@@ -890,13 +890,13 @@ function renderTable(data) {
     tbody.appendChild(row);
   });
 }
- 
+
 function applyFilterSort() {
   const filterValue = document.getElementById('filterInput').value.trim().toLowerCase();
   const sortKey     = document.getElementById('sortSelect').value;
- 
+
   let result = window.DS.filter(s => s.name.toLowerCase().includes(filterValue));
- 
+
   if (sortKey) {
     result = result.slice().sort((a, b) => {
       if (sortKey === 'name')  return a.name.localeCompare(b.name);
@@ -904,27 +904,27 @@ function applyFilterSort() {
       return b[sortKey] - a[sortKey];
     });
   }
- 
+
   renderTable(result);
   document.getElementById('rowCount').textContent = result.length + ' rows';
 }
- 
+
 function resetTable() {
   document.getElementById('filterInput').value = '';
   document.getElementById('sortSelect').value  = '';
   renderTable(window.DS);
   document.getElementById('rowCount').textContent = window.DS.length + ' rows';
 }
- 
+
 document.addEventListener('DOMContentLoaded', () => { loadDataset(); });
- 
- 
+
+
 /* ═══════════════════════════════════════════════════════════════════
    STUDENT 2 — VISUALIZATION LAYER (branch: feature/visualization)
 ═══════════════════════════════════════════════════════════════════ */
- 
+
 /* ─── COMMIT 1 ── "feat: implement drawBarChart for study hours vs score" ─ */
- 
+
 /**
  * drawBarChart(canvasId, data) — Student 2, commit 1/5
  *
@@ -936,14 +936,14 @@ document.addEventListener('DOMContentLoaded', () => { loadDataset(); });
  */
 function drawBarChart(canvasId, data) {
   if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
- 
+
   const sorted = [...data].sort((a, b) => a.studyHours - b.studyHours);
   const labels  = sorted.map(s => s.name.split(' ')[0]);
   const scores  = sorted.map(s => s.score);
- 
+
   const defaults = getChartDefaults();
   const ctx = document.getElementById(canvasId).getContext('2d');
- 
+
   window.CHARTS[canvasId] = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -979,15 +979,15 @@ function drawBarChart(canvasId, data) {
       }
     }
   });
- 
+
   document.getElementById('barPlaceholder').style.display = 'none';
   document.getElementById(canvasId).style.display = 'block';
   console.log("✅ Student 2: drawBarChart() complete.");
 }
- 
- 
+
+
 /* ─── COMMIT 2 ── "feat: implement drawScatterPlot attendance vs score" ─ */
- 
+
 /**
  * drawScatterPlot(canvasId, data) — Student 2, commit 2/5
  *
@@ -999,9 +999,9 @@ function drawBarChart(canvasId, data) {
  */
 function drawScatterPlot(canvasId, data) {
   if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
- 
+
   const points = data.map(s => ({ x: s.attendance, y: s.score, name: s.name }));
- 
+
   // Build regression line using two endpoints across attendance range
   const xs   = data.map(s => s.attendance);
   const ys   = data.map(s => s.score);
@@ -1017,10 +1017,10 @@ function drawScatterPlot(canvasId, data) {
     { x: xMin, y: parseFloat((slope * xMin + intercept).toFixed(2)) },
     { x: xMax, y: parseFloat((slope * xMax + intercept).toFixed(2)) },
   ];
- 
+
   const defaults = getChartDefaults();
   const ctx = document.getElementById(canvasId).getContext('2d');
- 
+
   window.CHARTS[canvasId] = new Chart(ctx, {
     type: 'scatter',
     data: {
@@ -1039,8 +1039,7 @@ function drawScatterPlot(canvasId, data) {
           borderColor: 'rgba(240,180,41,0.7)',
           borderWidth: 2,
           borderDash: [6, 3],
- 
- pointRadius: 0,
+          pointRadius: 0,
           fill: false,
         }
       ]
@@ -1066,15 +1065,15 @@ function drawScatterPlot(canvasId, data) {
       }
     }
   });
- 
+
   document.getElementById('scatterPlaceholder').style.display = 'none';
   document.getElementById(canvasId).style.display = 'block';
   console.log("✅ Student 2: drawScatterPlot() complete.");
 }
- 
- 
+
+
 /* ─── COMMIT 3 ── "feat: implement drawHistogram for score distribution" ─ */
- 
+
 /**
  * drawHistogram(canvasId, data) — Student 2, commit 3/5
  *
@@ -1086,11 +1085,11 @@ function drawScatterPlot(canvasId, data) {
  */
 function drawHistogram(canvasId, data) {
   if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
- 
+
   const binLabels = ['40s', '50s', '60s', '70s', '80s', '90s+'];
   const binEdges  = [40, 50, 60, 70, 80, 90, Infinity];
   const counts    = new Array(6).fill(0);
- 
+
   data.forEach(s => {
     for (let i = 0; i < binEdges.length - 1; i++) {
       if (s.score >= binEdges[i] && s.score < binEdges[i + 1]) {
@@ -1099,10 +1098,10 @@ function drawHistogram(canvasId, data) {
       }
     }
   });
- 
+
   const defaults = getChartDefaults();
   const ctx = document.getElementById(canvasId).getContext('2d');
- 
+
   window.CHARTS[canvasId] = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -1140,15 +1139,15 @@ function drawHistogram(canvasId, data) {
       }
     }
   });
- 
+
   document.getElementById('histPlaceholder').style.display = 'none';
   document.getElementById(canvasId).style.display = 'block';
   console.log("✅ Student 2: drawHistogram() complete.");
 }
- 
- 
+
+
 /* ─── COMMIT 4 ── "feat: implement drawPieChart for grade breakdown" ── */
- 
+
 /**
  * drawPieChart(canvasId, data) — Student 2, commit 4/5
  *
@@ -1160,7 +1159,7 @@ function drawHistogram(canvasId, data) {
  */
 function drawPieChart(canvasId, data) {
   if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
- 
+
   const gradeColors = {
     A: '#56d364',
     B: '#f0b429',
@@ -1171,13 +1170,13 @@ function drawPieChart(canvasId, data) {
   const counts  = grades.map(g => data.filter(s => s.grade === g).length);
   const total   = counts.reduce((a, v) => a + v, 0);
   const colors  = grades.map(g => gradeColors[g]);
- 
+
   const defaults = getChartDefaults();
   // Pie/doughnut charts don't use scales
   const { scales: _scales, ...pluginsOnly } = defaults;
- 
+
   const ctx = document.getElementById(canvasId).getContext('2d');
- 
+
   window.CHARTS[canvasId] = new Chart(ctx, {
     type: 'doughnut',
     data: {
@@ -1212,17 +1211,17 @@ function drawPieChart(canvasId, data) {
       }
     }
   });
- 
+
   document.getElementById('piePlaceholder').style.display = 'none';
   document.getElementById(canvasId).style.display = 'block';
   console.log("✅ Student 2: drawPieChart() complete.");
 }
- 
- 
+
+
 /* ─── COMMIT 5 ── "fix: add chart destroy to prevent canvas reuse errors" ─
    (destroy logic is already embedded in each draw function via
     window.CHARTS registry — initCharts() wires everything together)        */
- 
+
 /**
  * initCharts() — Student 2, commit 5/5
  *
@@ -1236,8 +1235,8 @@ function initCharts() {
   drawPieChart('pieChart',     window.DS);
   console.log("✅ Student 2: initCharts() complete.");
 }
- 
- 
+
+
 /**
  * getChartDefaults() — Student 2 helper
  * Pre-configured Chart.js options matching the dark theme.
@@ -1274,14 +1273,14 @@ function getChartDefaults() {
     }
   };
 }
- 
- 
+
+
 /* ═══════════════════════════════════════════════════════════════════
    STUDENT 3 — STATISTICAL ANALYSIS ENGINE (branch: feature/statistics)
 ═══════════════════════════════════════════════════════════════════ */
- 
+
 /* ─── COMMIT 1 ── "feat: implement mean, median, mode functions" ───── */
- 
+
 /**
  * mean(arr) — Student 3, commit 1/5
  *
@@ -1301,7 +1300,7 @@ function mean(arr) {
   const sum = arr.reduce((acc, v) => acc + v, 0);
   return parseFloat((sum / arr.length).toFixed(2));
 }
- 
+
 /**
  * median(arr) — Student 3, commit 1/5
  *
@@ -1328,7 +1327,7 @@ function median(arr) {
     : sorted[mid];
   return parseFloat(result.toFixed(2));
 }
- 
+
 /**
  * mode(arr) — Student 3, commit 1/5
  *
@@ -1357,10 +1356,10 @@ function mode(arr) {
     .sort((a, b) => a - b);
   return modes.join(" & ");
 }
- 
- 
+
+
 /* ─── COMMIT 2 ── "feat: implement variance and standard deviation" ── */
- 
+
 /**
  * variance(arr) — Student 3, commit 2/5
  *
@@ -1380,21 +1379,24 @@ function variance(arr) {
   const sumSq = arr.reduce((acc, v) => acc + Math.pow(v - mu, 2), 0);
   return parseFloat((sumSq / arr.length).toFixed(2));
 }
- 
+
 /**
  * stdDev(arr) — Student 3, commit 2/5
  *
- * PURPOSE: Compute the standard deviation (square root of variance).
+ * PURPOSE: Standard deviation — square root of population variance.
  *
  * @param  {number[]} arr - Array of numbers
- * @returns {number}       Standard deviation σ, rounded to 2 decimal places
+ * @returns {number}       σ, rounded to 2 decimal places
  *
- * FORMULA: σ = √σ²
+ * FORMULA: σ = √(variance(arr))
  */
 function stdDev(arr) {
   return parseFloat(Math.sqrt(variance(arr)).toFixed(2));
 }
- 
+
+
+/* ─── COMMIT 3 ── "feat: implement Pearson correlation coefficient" ── */
+
 /**
  * pearsonCorr(x, y) — Student 3, commit 3/5
  *
@@ -1430,9 +1432,10 @@ function pearsonCorr(x, y) {
   if (denom === 0) return 0;
   return parseFloat((num / denom).toFixed(4));
 }
- 
+
+
 /* ─── COMMIT 4 ── "feat: implement linear regression with R-squared" ─ */
- 
+
 /**
  * linearRegression(x, y) — Student 3, commit 4/5
  *
@@ -1468,9 +1471,10 @@ function linearRegression(x, y) {
   const rSquared  = parseFloat((r * r).toFixed(4));
   return { slope, intercept, rSquared };
 }
- 
+
+
 /* ─── COMMIT 5 ── "feat: wire renderStats to display results in the DOM" */
- 
+
 /**
  * renderStats(data) — Student 3, commit 5/5
  *
@@ -1489,7 +1493,7 @@ function renderStats(data) {
     // 1. Extract arrays
     const scores = data.map(d => d.score);
     const hours  = data.map(d => d.studyHours);
- 
+
     // 2. Compute descriptive stats
     const mn  = mean(scores);
     const med = median(scores);
@@ -1498,28 +1502,28 @@ function renderStats(data) {
     const vr  = variance(scores);
     const minS = Math.min(...scores);
     const maxS = Math.max(...scores);
- 
+
     // 3. Compute correlation & regression
     const r   = pearsonCorr(hours, scores);
     const reg = linearRegression(hours, scores);
- 
+
     // 4. Interpretation: |r| ≥ 0.7 Strong, ≥ 0.4 Moderate, < 0.4 Weak
     const absR     = Math.abs(r);
     const strength = absR >= 0.7 ? "Strong" : absR >= 0.4 ? "Moderate" : "Weak";
     const direction = r >= 0 ? "Positive" : "Negative";
     const interp   = `${strength} ${direction} Correlation`;
- 
+
     // 5. Equation string
     const sign     = reg.intercept >= 0 ? "+" : "−";
     const absIntercept = Math.abs(reg.intercept).toFixed(2);
     const equation = `score = ${reg.slope.toFixed(2)}·hours ${sign} ${absIntercept}`;
- 
+
     // 6. Update summary cards
     document.getElementById('statMean').textContent   = mn;
     document.getElementById('statMedian').textContent = med;
     document.getElementById('statStdDev').textContent = sd;
     document.getElementById('statMode').textContent   = md;
- 
+
     // 7. Update descriptive table
     document.getElementById('dCount').textContent    = scores.length;
     document.getElementById('dMin').textContent      = minS;
@@ -1527,7 +1531,7 @@ function renderStats(data) {
     document.getElementById('dRange').textContent    = maxS - minS;
     document.getElementById('dVariance').textContent = vr;
     document.getElementById('dStdDev').textContent   = sd;
- 
+
     // 8. Update regression table
     document.getElementById('rPearson').textContent   = r;
     document.getElementById('rInterp').textContent    = interp;
@@ -1535,7 +1539,7 @@ function renderStats(data) {
     document.getElementById('rIntercept').textContent = reg.intercept;
     document.getElementById('rSquared').textContent   = reg.rSquared;
     document.getElementById('rEquation').textContent  = equation;
- 
+
     console.log("✅ Student 3: renderStats() complete.");
   } catch (err) {
     console.error("❌ Student 3 renderStats() error:", err);
@@ -1544,7 +1548,6 @@ function renderStats(data) {
  
  
 </script>
- 
+
 </body>
 </html>
- 
