@@ -1183,13 +1183,39 @@ function drawBarChart(canvasId, data) {
  *  - Draw a simple linear regression line as a second dataset (optional bonus)
  */
 function drawScatterPlot(canvasId, data) {
-  // TODO: Implement this function
-  // After implementing, show the canvas:
-  // document.getElementById('scatterPlaceholder').style.display = 'none';
-  // document.getElementById(canvasId).style.display = 'block';
+  /*
+   * Purpose: Highlights potential correlations between a student's class attendance rate and their overall performance.
+   * Display: A scatter plot where each point represents an individual student's attendance (x) and score (y).
+   * How it works: Maps the dataset to `{x, y}` objects required by Chart.js. Tooltips are customized to extract and display the student's name tied to the data point.
+   */
+  if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
 
-  console.warn("⚠ Student 2: drawScatterPlot() is not yet implemented.");
+  const points = data.map(d => ({ x: d.attendance, y: d.score, name: d.name }));
+
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  const options = getChartDefaults();
+  options.plugins.tooltip.callbacks = {
+    label: function(context) {
+      return `${context.raw.name}: Attendance ${context.raw.x}%, Score ${context.raw.y}`;
+    }
+  };
+
+  window.CHARTS[canvasId] = new Chart(ctx, {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Student Performance',
+        data: points,
+        backgroundColor: '#3ecfcf' // Teal
+      }]
+    },
+    options: options
+  });
+
+  document.getElementById('scatterPlaceholder').style.display = 'none';
+  document.getElementById(canvasId).style.display = 'block';
 }
+
 
 /**
  * STUDENT 2 TODO — drawHistogram(canvasId, data)
