@@ -1134,12 +1134,37 @@ function initCharts() {
  *  - Enable the legend and tooltip
  */
 function drawBarChart(canvasId, data) {
-  // TODO: Implement this function
-  // After implementing, show the canvas:
-  // document.getElementById('barPlaceholder').style.display = 'none';
-  // document.getElementById(canvasId).style.display = 'block';
+  /*
+   * Purpose: Visualizes the relationship between the time a student spends studying and their final score.
+   * Display: A standard bar chart sorted by study hours from lowest to highest.
+   * How it works: Extracts the first name of each student and their final score, sorts the dataset by 'studyHours', and plots the points with a custom 80% opacity amber color.
+   */
+  if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
 
-  console.warn("⚠ Student 2: drawBarChart() is not yet implemented.");
+  const sortedData = [...data].sort((a, b) => a.studyHours - b.studyHours);
+  const labels = sortedData.map(d => d.name.split(' ')[0] + ` (${d.studyHours}h)`);
+  const scores = sortedData.map(d => d.score);
+
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  const options = getChartDefaults();
+  options.scales.y.min = 0;
+  options.scales.y.max = 100;
+
+  window.CHARTS[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Final Score',
+        data: scores,
+        backgroundColor: 'rgba(240, 180, 41, 0.8)' // Amber #f0b429
+      }]
+    },
+    options: options
+  });
+
+  document.getElementById('barPlaceholder').style.display = 'none';
+  document.getElementById(canvasId).style.display = 'block';
 }
 
 /**
@@ -1158,13 +1183,39 @@ function drawBarChart(canvasId, data) {
  *  - Draw a simple linear regression line as a second dataset (optional bonus)
  */
 function drawScatterPlot(canvasId, data) {
-  // TODO: Implement this function
-  // After implementing, show the canvas:
-  // document.getElementById('scatterPlaceholder').style.display = 'none';
-  // document.getElementById(canvasId).style.display = 'block';
+  /*
+   * Purpose: Highlights potential correlations between a student's class attendance rate and their overall performance.
+   * Display: A scatter plot where each point represents an individual student's attendance (x) and score (y).
+   * How it works: Maps the dataset to `{x, y}` objects required by Chart.js. Tooltips are customized to extract and display the student's name tied to the data point.
+   */
+  if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
 
-  console.warn("⚠ Student 2: drawScatterPlot() is not yet implemented.");
+  const points = data.map(d => ({ x: d.attendance, y: d.score, name: d.name }));
+
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  const options = getChartDefaults();
+  options.plugins.tooltip.callbacks = {
+    label: function(context) {
+      return `${context.raw.name}: Attendance ${context.raw.x}%, Score ${context.raw.y}`;
+    }
+  };
+
+  window.CHARTS[canvasId] = new Chart(ctx, {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Student Performance',
+        data: points,
+        backgroundColor: '#3ecfcf' // Teal
+      }]
+    },
+    options: options
+  });
+
+  document.getElementById('scatterPlaceholder').style.display = 'none';
+  document.getElementById(canvasId).style.display = 'block';
 }
+
 
 /**
  * STUDENT 2 TODO — drawHistogram(canvasId, data)
@@ -1187,12 +1238,44 @@ function drawScatterPlot(canvasId, data) {
  *  - Y-axis: Count (integer ticks)
  */
 function drawHistogram(canvasId, data) {
-  // TODO: Implement this function
-  // After implementing, show the canvas:
-  // document.getElementById('histPlaceholder').style.display = 'none';
-  // document.getElementById(canvasId).style.display = 'block';
+  /*
+   * Purpose: Shows the frequency distribution of final scores across the entire class.
+   * Display: A histogram (simulated using a bar chart with 0 gap) colored in coral.
+   * How it works: Iterates through the student scores, incrementing the corresponding bin array index based on range checks, then plots the counts over predefined categorical labels.
+   */
+  if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
 
-  console.warn("⚠ Student 2: drawHistogram() is not yet implemented.");
+  let bins = [0, 0, 0, 0, 0, 0];
+  data.forEach(d => {
+    if (d.score >= 90) bins[5]++;
+    else if (d.score >= 80) bins[4]++;
+    else if (d.score >= 70) bins[3]++;
+    else if (d.score >= 60) bins[2]++;
+    else if (d.score >= 50) bins[1]++;
+    else if (d.score >= 40) bins[0]++;
+  });
+
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  const options = getChartDefaults();
+  options.scales.y.ticks.stepSize = 1;
+
+  window.CHARTS[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['40s', '50s', '60s', '70s', '80s', '90s+'],
+      datasets: [{
+        label: 'Student Count',
+        data: bins,
+        backgroundColor: 'rgba(224, 92, 106, 0.75)', // Coral #e05c6a
+        barPercentage: 1.0,
+        categoryPercentage: 1.0
+      }]
+    },
+    options: options
+  });
+
+  document.getElementById('histPlaceholder').style.display = 'none';
+  document.getElementById(canvasId).style.display = 'block';
 }
 
 /**
@@ -1214,21 +1297,52 @@ function drawHistogram(canvasId, data) {
  *  - Cutout: '55%' for doughnut style
  */
 function drawPieChart(canvasId, data) {
-  // TODO: Implement this function
-  // After implementing, show the canvas:
-  // document.getElementById('piePlaceholder').style.display = 'none';
-  // document.getElementById(canvasId).style.display = 'block';
+  /*
+   * Purpose: Displays the overall proportion of each letter grade awarded to the class.
+   * Display: A doughnut chart with a 55% center cutout utilizing distinct categorical colors.
+   * How it works: Aggregates the dataset by grade type. Calculates percentage in the tooltip callback based on total dataset length.
+   */
+  if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
 
-  console.warn("⚠ Student 2: drawPieChart() is not yet implemented.");
+  const counts = { A: 0, B: 0, C: 0, D: 0 };
+  data.forEach(d => {
+    if(counts[d.grade] !== undefined) counts[d.grade]++;
+  });
+
+  const total = data.length;
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  const options = getChartDefaults();
+  options.cutout = '55%';
+  delete options.scales; // No axes for pie charts
+  
+  options.plugins.tooltip.callbacks = {
+    label: function(context) {
+      let val = context.raw;
+      let percentage = ((val / total) * 100).toFixed(1);
+      return `${context.label}: ${val} students (${percentage}%)`;
+    }
+  };
+
+  window.CHARTS[canvasId] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['A', 'B', 'C', 'D'],
+      datasets: [{
+        data: [counts.A, counts.B, counts.C, counts.D],
+        backgroundColor: ['#56d364', '#f0b429', '#3ecfcf', '#e05c6a'],
+        borderWidth: 0
+      }]
+    },
+    options: options
+  });
+
+  document.getElementById('piePlaceholder').style.display = 'none';
+  document.getElementById(canvasId).style.display = 'block';
 }
 
 /**
  * STUDENT 2 HELPER — getChartDefaults()
- * Pre-configured Chart.js global options matching the dark theme.
- * Use or extend this in your chart configs.
- *
- * @returns {Object} Chart.js options object
- */
+
 function getChartDefaults() {
   return {
     responsive: true,
