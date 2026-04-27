@@ -1339,6 +1339,43 @@ function variance(arr) {
   return parseFloat((sumSq / arr.length).toFixed(2));
 }
 
+/* ─── COMMIT 3 ── "feat: implement Pearson correlation coefficient" ── */
+
+/**
+ * pearsonCorr(x, y) — Student 3, commit 3/5
+ *
+ * PURPOSE: Pearson correlation coefficient r between two arrays.
+ *          r ranges from -1 (perfect negative) to +1 (perfect positive).
+ *
+ * @param  {number[]} x - Independent variable values
+ * @param  {number[]} y - Dependent variable values (same length as x)
+ * @returns {number}      r, rounded to 4 decimal places
+ *
+ * FORMULA:
+ *   r = Σ((xᵢ−x̄)(yᵢ−ȳ)) / √(Σ(xᵢ−x̄)² · Σ(yᵢ−ȳ)²)
+ *
+ * INTERPRETATION (used in renderStats):
+ *   |r| ≥ 0.7 → Strong
+ *   |r| ≥ 0.4 → Moderate
+ *   |r| < 0.4 → Weak
+ *   Sign: positive = direct, negative = inverse
+ */
+function pearsonCorr(x, y) {
+  if (!x || !y || x.length !== y.length || x.length === 0) return 0;
+  const xBar = mean(x);
+  const yBar = mean(y);
+  let num = 0, denomX = 0, denomY = 0;
+  for (let i = 0; i < x.length; i++) {
+    const dx = x[i] - xBar;
+    const dy = y[i] - yBar;
+    num    += dx * dy;
+    denomX += dx * dx;
+    denomY += dy * dy;
+  }
+  const denom = Math.sqrt(denomX * denomY);
+  if (denom === 0) return 0;
+  return parseFloat((num / denom).toFixed(4));
+}
 
 
 /* ─────────────────────────────────────────────────────────────────
