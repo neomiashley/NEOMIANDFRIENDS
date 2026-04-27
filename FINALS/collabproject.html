@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DataSci Collab — Git Collaborative Project</title>
+<<<<<<< HEAD
+ 
+  <!-- Libraries: Chart.js for visualizations and PapaParse for CSV parsing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+ 
+  <!-- Google Fonts -->
+=======
 
   <!--
   ╔══════════════════════════════════════════════════════════════════════════╗
@@ -44,14 +52,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 
   <!-- Google Fonts — Courier Prime for terminal feel, DM Sans for UI -->
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ──────────────────────────────────────────────
-       DESIGN TOKENS  (CSS custom properties)
-       Any student can update these for theming.
-    ────────────────────────────────────────────── */
     :root {
       --bg:         #0d0f14;
       --surface:    #151820;
@@ -77,16 +82,14 @@
       color: var(--text);
       min-height: 100vh;
       padding: 0 0 80px;
-      background-image: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(255,255,255,0.013) 2px,
-        rgba(255,255,255,0.013) 4px
-      );
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.013) 2px, rgba(255,255,255,0.013) 4px);
     }
+<<<<<<< HEAD
+ 
+=======
 
     /* ── HEADER ─────────────────────────────────── */
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
     header {
       background: var(--surface);
       border-bottom: 2px solid var(--accent);
@@ -99,6 +102,61 @@
       z-index: 100;
       box-shadow: var(--glow);
     }
+<<<<<<< HEAD
+ 
+    .header-left h1 { font-family: var(--mono); font-size: 1.3rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
+    .header-left p { font-size: 0.78rem; color: var(--text-dim); margin-top: 2px; font-family: var(--mono); }
+ 
+    .git-badge { display: flex; align-items: center; gap: 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 14px; font-family: var(--mono); font-size: 0.75rem; color: var(--accent2); }
+    .git-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+ 
+    main { max-width: 1300px; margin: 0 auto; padding: 40px 30px; }
+ 
+    .contrib-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 50px; }
+    .contrib-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; position: relative; overflow: hidden; }
+    .contrib-card.s1::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); }
+    .contrib-card.s2::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent2); }
+    .contrib-card.s3::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent3); }
+ 
+    .contrib-card .student-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+    .s1 .student-tag { color: var(--accent); }
+    .s2 .student-tag { color: var(--accent2); }
+    .s3 .student-tag { color: var(--accent3); }
+ 
+    .section { margin-bottom: 56px; }
+    .section-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .section-header h2 { font-family: var(--mono); font-size: 1.05rem; text-transform: uppercase; }
+ 
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; }
+    .table-wrap { overflow: auto; max-height: 400px; border-radius: var(--radius); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; font-family: var(--mono); }
+    thead th { background: var(--surface2); color: var(--accent); text-align: left; padding: 10px 14px; text-transform: uppercase; border-bottom: 2px solid var(--border); position: sticky; top: 0; }
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody td { padding: 9px 14px; color: var(--text); }
+    .grade-A { color: #56d364; } .grade-B { color: var(--accent); } .grade-C { color: var(--accent3); }
+ 
+    .toolbar { display: flex; gap: 10px; margin-bottom: 18px; align-items: center; }
+    input, select, button { background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-family: var(--mono); padding: 8px 12px; border-radius: var(--radius); }
+    button.primary { background: var(--accent); color: #000; font-weight: 700; }
+ 
+    .chart-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .chart-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+    .stat-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; text-align: center; }
+    .stat-value { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; color: var(--accent3); }
+ 
+    .analysis-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .analysis-panel { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px; }
+    .stat-list { list-style: none; font-family: var(--mono); font-size: 0.82rem; }
+    .stat-list li { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--border); }
+    
+    footer { text-align: center; margin-top: 60px; font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); }
+  </style>
+</head>
+<body>
+ 
+=======
 
     .header-left h1 {
       font-family: var(--mono);
@@ -528,6 +586,7 @@
 <!-- ═══════════════════════════════════════════════════════
      HEADER
 ═══════════════════════════════════════════════════════ -->
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
 <header>
   <div class="header-left">
     <h1>DataSci Collab Dashboard</h1>
@@ -540,58 +599,48 @@
 </header>
 
 <main>
+<<<<<<< HEAD
+  <!-- Contribution Cards -->
+=======
 
   <!-- ═══════════════════════════════════════════════════
        CONTRIBUTION OVERVIEW CARDS
   ═══════════════════════════════════════════════════ -->
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
   <div class="contrib-grid">
     <div class="contrib-card s1">
       <div class="student-tag">Student 1 · Repo Owner</div>
-      <h3>Dataset Engine &amp; Project Setup</h3>
-      <ul>
-        <li>Initialize the GitHub repository</li>
-        <li>Implement <code>loadDataset()</code></li>
-        <li>Implement <code>renderTable()</code></li>
-        <li>Implement filter &amp; sort logic</li>
-        <li>Invite collaborators &amp; protect main</li>
-      </ul>
-      <span class="branch-tag">branch: main (setup) → feature/data-engine</span>
+      <h3>Dataset Engine &amp; Setup</h3>
+      <span class="branch-tag">branch: feature/data-engine</span>
     </div>
     <div class="contrib-card s2">
       <div class="student-tag">Student 2 · Collaborator</div>
       <h3>Data Visualization Layer</h3>
-      <ul>
-        <li>Implement <code>drawBarChart()</code></li>
-        <li>Implement <code>drawScatterPlot()</code></li>
-        <li>Implement <code>drawHistogram()</code></li>
-        <li>Implement <code>drawPieChart()</code></li>
-        <li>Open and get PR merged into main</li>
-      </ul>
       <span class="branch-tag">branch: feature/visualization</span>
     </div>
     <div class="contrib-card s3">
       <div class="student-tag">Student 3 · Collaborator</div>
-      <h3>Statistical Analysis Engine</h3>
-      <ul>
-        <li>Implement <code>mean()</code>, <code>median()</code>, <code>mode()</code></li>
-        <li>Implement <code>stdDev()</code>, <code>variance()</code></li>
-        <li>Implement <code>pearsonCorr()</code></li>
-        <li>Implement <code>linearRegression()</code></li>
-        <li>Open and get PR merged into main</li>
-      </ul>
+      <h3>Statistical Analysis</h3>
       <span class="branch-tag">branch: feature/statistics</span>
     </div>
   </div>
+<<<<<<< HEAD
+ 
+  <!-- Section 01: Dataset -->
+  <section class="section">
+=======
 
 
   <!-- ═══════════════════════════════════════════════════
        SECTION 1 — DATASET & TABLE  (STUDENT 1)
   ═══════════════════════════════════════════════════ -->
   <section class="section" id="sec-data">
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
     <div class="section-header">
       <h2>01 · Dataset Explorer</h2>
-      <span class="owner-tag tag-s1">Student 1 · Repo Owner</span>
     </div>
+<<<<<<< HEAD
+=======
 
     <div class="todo-callout">
       <strong>⚠ TODO — Student 1</strong>
@@ -600,49 +649,50 @@
       After completion, commit and open your PR to main.
     </div>
 
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
     <div class="panel">
       <div class="toolbar">
-        <input type="text" id="filterInput" placeholder="Filter by student name..." />
+        <input type="text" id="filterInput" placeholder="Filter by Student ID..." />
         <select id="sortSelect">
           <option value="">Sort by...</option>
-          <option value="name">Name</option>
           <option value="studyHours">Study Hours</option>
           <option value="score">Final Score</option>
-          <option value="grade">Grade</option>
           <option value="attendance">Attendance %</option>
         </select>
-        <button onclick="applyFilterSort()">Apply</button>
+        <button class="primary" onclick="applyFilterSort()">Apply</button>
         <button onclick="resetTable()">Reset</button>
         <span class="count-badge" id="rowCount">— rows</span>
       </div>
+<<<<<<< HEAD
+=======
 
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
       <div class="table-wrap">
         <table id="dataTable">
           <thead>
             <tr>
               <th>#</th>
-              <th>Student Name</th>
-              <th>Study Hours/Week</th>
+              <th>Student ID</th>
+              <th>Gender</th>
+              <th>Study Hrs</th>
               <th>Attendance %</th>
-              <th>Midterm Score</th>
               <th>Final Score</th>
-              <th>Assignments Done</th>
-              <th>Sleep Hrs/Night</th>
-              <th>Part-time Job</th>
               <th>Grade</th>
             </tr>
           </thead>
           <tbody id="tableBody">
-            <tr>
-              <td colspan="10" style="text-align:center; color:var(--text-dim); font-family:var(--mono); padding:40px;">
-                ⌛ Waiting for Student 1 to implement loadDataset() and renderTable()
-              </td>
-            </tr>
+            <tr><td colspan="7" style="text-align:center;">⌛ Loading Data...</td></tr>
           </tbody>
         </table>
       </div>
     </div>
   </section>
+<<<<<<< HEAD
+ 
+  <!-- Section 02: Visualizations -->
+  <section class="section">
+    <div class="section-header"><h2>02 · Visualizations</h2></div>
+=======
 
 
   <!-- ═══════════════════════════════════════════════════
@@ -660,41 +710,20 @@
       <code>onDataReady()</code>. Chart destroy safety added. PR from <code>feature/visualization</code> merged into <code>main</code>.
     </div>
 
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
     <div class="chart-grid">
-      <div class="chart-box">
-        <h4>Study Hours vs Final Score</h4>
-        <div class="chart-placeholder" id="barPlaceholder">
-          <span>📊</span>
-          Student 2: implement drawBarChart()
-        </div>
-        <canvas id="barChart" style="display:none;"></canvas>
-      </div>
-      <div class="chart-box">
-        <h4>Attendance % vs Final Score</h4>
-        <div class="chart-placeholder" id="scatterPlaceholder">
-          <span>🔵</span>
-          Student 2: implement drawScatterPlot()
-        </div>
-        <canvas id="scatterChart" style="display:none;"></canvas>
-      </div>
-      <div class="chart-box">
-        <h4>Final Score Distribution</h4>
-        <div class="chart-placeholder" id="histPlaceholder">
-          <span>📈</span>
-          Student 2: implement drawHistogram()
-        </div>
-        <canvas id="histChart" style="display:none;"></canvas>
-      </div>
-      <div class="chart-box">
-        <h4>Grade Distribution</h4>
-        <div class="chart-placeholder" id="piePlaceholder">
-          <span>🍕</span>
-          Student 2: implement drawPieChart()
-        </div>
-        <canvas id="pieChart" style="display:none;"></canvas>
-      </div>
+      <div class="chart-box"><h4>Study Hours vs Final Score</h4><canvas id="barChart"></canvas></div>
+      <div class="chart-box"><h4>Attendance % vs Final Score</h4><canvas id="scatterChart"></canvas></div>
+      <div class="chart-box"><h4>Final Score Distribution</h4><canvas id="histChart"></canvas></div>
+      <div class="chart-box"><h4>Grade Distribution</h4><canvas id="pieChart"></canvas></div>
     </div>
   </section>
+<<<<<<< HEAD
+ 
+  <!-- Section 03: Statistics -->
+  <section class="section">
+    <div class="section-header"><h2>03 · Statistical Analysis</h2></div>
+=======
 
 
   <!-- ═══════════════════════════════════════════════════
@@ -712,54 +741,46 @@
       <code>renderStats(window.DS)</code>. PR from <code>feature/statistics</code> merged into <code>main</code>.
     </div>
 
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
     <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-label">Mean Score</div>
-        <div class="stat-value" id="statMean"><span class="stat-placeholder">—</span></div>
-        <div class="stat-sub">Final Score</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Median Score</div>
-        <div class="stat-value" id="statMedian"><span class="stat-placeholder">—</span></div>
-        <div class="stat-sub">Final Score</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Std Deviation</div>
-        <div class="stat-value" id="statStdDev"><span class="stat-placeholder">—</span></div>
-        <div class="stat-sub">Final Score</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Mode</div>
-        <div class="stat-value" id="statMode"><span class="stat-placeholder">—</span></div>
-        <div class="stat-sub">Final Score</div>
-      </div>
+      <div class="stat-card"><div class="stat-label">Mean Score</div><div class="stat-value" id="statMean">—</div></div>
+      <div class="stat-card"><div class="stat-label">Median Score</div><div class="stat-value" id="statMedian">—</div></div>
+      <div class="stat-card"><div class="stat-label">Std Deviation</div><div class="stat-value" id="statStdDev">—</div></div>
+      <div class="stat-card"><div class="stat-label">Mode</div><div class="stat-value" id="statMode">—</div></div>
     </div>
+<<<<<<< HEAD
+=======
 
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
     <div class="analysis-row">
       <div class="analysis-panel">
-        <h4>Descriptive Statistics — Final Score</h4>
+        <h4>Descriptive Stats</h4>
         <ul class="stat-list">
-          <li><span class="key">Count (n)</span>        <span class="val" id="dCount">—</span></li>
-          <li><span class="key">Min</span>              <span class="val" id="dMin">—</span></li>
-          <li><span class="key">Max</span>              <span class="val" id="dMax">—</span></li>
-          <li><span class="key">Range</span>            <span class="val" id="dRange">—</span></li>
-          <li><span class="key">Variance (σ²)</span>   <span class="val" id="dVariance">—</span></li>
-          <li><span class="key">Std Dev (σ)</span>      <span class="val" id="dStdDev">—</span></li>
+          <li><span class="key">Count (n)</span> <span class="val" id="dCount">—</span></li>
+          <li><span class="key">Min / Max</span> <span class="val" id="dMinMax">—</span></li>
+          <li><span class="key">Variance</span> <span class="val" id="dVariance">—</span></li>
         </ul>
       </div>
       <div class="analysis-panel">
-        <h4>Correlation &amp; Regression (Study Hours → Score)</h4>
+        <h4>Correlation (Study → Score)</h4>
         <ul class="stat-list">
-          <li><span class="key">Pearson r</span>        <span class="val" id="rPearson">—</span></li>
-          <li><span class="key">Interpretation</span>   <span class="val" id="rInterp">—</span></li>
-          <li><span class="key">Slope (m)</span>        <span class="val" id="rSlope">—</span></li>
-          <li><span class="key">Intercept (b)</span>    <span class="val" id="rIntercept">—</span></li>
-          <li><span class="key">R² (fit quality)</span> <span class="val" id="rSquared">—</span></li>
-          <li><span class="key">Equation</span>         <span class="val" id="rEquation">—</span></li>
+          <li><span class="key">Pearson r</span> <span class="val" id="rPearson">—</span></li>
+          <li><span class="key">R² Fit</span> <span class="val" id="rSquared">—</span></li>
+          <li><span class="key">Equation</span> <span class="val" id="rEquation">—</span></li>
         </ul>
       </div>
     </div>
   </section>
+<<<<<<< HEAD
+</main>
+ 
+<footer>DS COLLAB PROJECT · GIT COLLABORATIVE ACTIVITY</footer>
+ 
+<script>
+"use strict";
+window.DS = [];
+window.CHARTS = {};
+=======
 
 </main>
 
@@ -778,45 +799,46 @@
 /* ─────────────────────────────────────────────────────────────────
    SHARED DATASET (read-only)
 ────────────────────────────────────────────────────────────────── */
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
 
-function parseCSV(csvText) {
-  const lines = csvText.trim().split('\n');
-  const headers = lines[0].split(',').map(h => h.trim());
-
-  return lines.slice(1).map((line, index) => {
-    const values = line.split(',');
-
-    let raw = {};
-    headers.forEach((header, i) => {
-      let value = values[i];
-
-      // Convert numbers
-      if (!isNaN(value) && value !== '') {
-        value = Number(value);
-      }
-
-      // Convert boolean
-      if (value === 'true') value = true;
-      if (value === 'false') value = false;
-
-      raw[header] = value;
-    });
-
-    // 🔥 TRANSFORM INTO DASHBOARD FORMAT
-    return {
-      name: "Student " + raw.student_id, // no name → create label
-      studyHours: raw.study_hours_per_day,
-      attendance: raw.attendance_percentage,
-      midterm: raw.midterm_score,
-      score: raw.final_exam_score, // IMPORTANT: this is used everywhere
-      assignments: raw.assignment_score,
-      sleep: raw.sleep_hours,
-      job: raw.extra_classes, // closest equivalent
-      grade: raw.grade
-    };
+/**
+ * FIX 1: Corrected CSV filename typo — was "student_performance_dara.csv"
+ *         (missing 't'), now "student_performance_data.csv"
+ */
+function loadDataset() {
+  const csvFile = "student_performance_data.csv";
+  
+  Papa.parse(csvFile, {
+    download: true,
+    header: true,
+    dynamicTyping: true,
+    skipEmptyLines: true,
+    complete: function(results) {
+      // Map raw CSV headers to property names used in Student 2 & 3 code
+      window.DS = results.data.map(row => ({
+        student_id: row.student_id,
+        gender:     row.gender,
+        studyHours: row.study_hours_per_day,
+        attendance: row.attendance_percentage,
+        score:      row.overall_score,
+        grade:      String(row.grade).trim().toUpperCase()
+      }));
+      
+      renderTable(window.DS);
+      onDataReady();
+    },
+    error: err => console.error("CSV Load Error:", err)
   });
 }
 
+<<<<<<< HEAD
+function renderTable(data) {
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+  document.getElementById('rowCount').textContent = data.length + ' rows';
+
+  data.forEach((s, i) => {
+=======
 window.DS    = [];
 window.CHARTS = {};
 
@@ -872,25 +894,28 @@ function renderTable(data) {
   }
 
   data.forEach((student, index) => {
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
     const row = document.createElement('tr');
-    const gradeClass = student.grade ? 'grade-' + student.grade : '';
-    const jobText = student.job === undefined ? '—' : student.job ? 'Yes' : 'No';
     row.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${student.name}</td>
-      <td class="numeric">${student.studyHours ?? '—'}</td>
-      <td class="numeric">${student.attendance ?? '—'}</td>
-      <td class="numeric">${student.midterm ?? '—'}</td>
-      <td class="numeric">${student.score ?? '—'}</td>
-      <td class="numeric">${student.assignments ?? '—'}</td>
-      <td class="numeric">${student.sleep ?? '—'}</td>
-      <td>${jobText}</td>
-      <td class="${gradeClass}">${student.grade}</td>
+      <td>${i + 1}</td>
+      <td>${s.student_id}</td>
+      <td>${s.gender}</td>
+      <td>${s.studyHours}</td>
+      <td>${s.attendance}%</td>
+      <td>${s.score}</td>
+      <td class="grade-${s.grade}">${s.grade}</td>
     `;
     tbody.appendChild(row);
   });
 }
 
+<<<<<<< HEAD
+function onDataReady() {
+  renderStats(window.DS);
+  initCharts();
+}
+
+=======
 function applyFilterSort() {
   const filterValue = document.getElementById('filterInput').value.trim().toLowerCase();
   const sortKey     = document.getElementById('sortSelect').value;
@@ -925,15 +950,99 @@ document.addEventListener('DOMContentLoaded', () => { loadDataset(); });
 
 /* ─── COMMIT 1 ── "feat: implement drawBarChart for study hours vs score" ─ */
 
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
 /**
- * drawBarChart(canvasId, data) — Student 2, commit 1/5
- *
- * PURPOSE: Bar chart — students sorted by study hours (asc) on x-axis,
- *          Final Score on y-axis. Bars colored amber (#f0b429) at 80% opacity.
- *
- * @param {string} canvasId - 'barChart'
- * @param {Array}  data     - window.DS array
+ * STUDENT 3: Statistics Engine
  */
+<<<<<<< HEAD
+function mean(arr) { return arr.reduce((a,b) => a+b, 0) / arr.length; }
+
+function median(arr) {
+  const sorted = [...arr].sort((a,b) => a-b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+function stddev(arr) {
+  const mn = mean(arr);
+  const variance = arr.reduce((sum, v) => sum + Math.pow(v - mn, 2), 0) / arr.length;
+  return Math.sqrt(variance);
+}
+
+function variance(arr) {
+  const mn = mean(arr);
+  return arr.reduce((sum, v) => sum + Math.pow(v - mn, 2), 0) / arr.length;
+}
+
+function mode(arr) {
+  // Round to nearest integer first — raw floats are nearly all unique on continuous data
+  const rounded = arr.map(v => Math.round(v));
+  const freq = {};
+  rounded.forEach(v => { freq[v] = (freq[v] || 0) + 1; });
+  const maxFreq = Math.max(...Object.values(freq));
+  if (maxFreq === 1) return 'No mode';
+  const modes = Object.keys(freq).filter(k => freq[k] === maxFreq).map(Number).sort((a,b) => a-b);
+  return modes.join(', ');
+}
+
+function pearsonR(xArr, yArr) {
+  const n = xArr.length;
+  const mx = mean(xArr), my = mean(yArr);
+  const num = xArr.reduce((sum, x, i) => sum + (x - mx) * (yArr[i] - my), 0);
+  const den = Math.sqrt(
+    xArr.reduce((s, x) => s + Math.pow(x - mx, 2), 0) *
+    yArr.reduce((s, y) => s + Math.pow(y - my, 2), 0)
+  );
+  return den === 0 ? 0 : num / den;
+}
+
+function renderStats(data) {
+  const scores = data.map(d => d.score);
+  const hours  = data.map(d => d.studyHours);
+
+  // Top stat cards
+  document.getElementById('statMean').textContent   = mean(scores).toFixed(2);
+  document.getElementById('statMedian').textContent = median(scores).toFixed(2);
+  document.getElementById('statStdDev').textContent = stddev(scores).toFixed(2);
+  document.getElementById('statMode').textContent   = mode(scores);
+
+  // Descriptive stats panel
+  document.getElementById('dCount').textContent   = scores.length;
+  document.getElementById('dMinMax').textContent  = `${Math.min(...scores)} / ${Math.max(...scores)}`;
+  document.getElementById('dVariance').textContent = variance(scores).toFixed(2);
+
+  // Correlation panel — real computed values
+  const r  = pearsonR(hours, scores);
+  const r2 = r * r;
+
+  // Linear regression: score = m*hours + b
+  const mx = mean(hours), my = mean(scores);
+  const m  = hours.reduce((sum, x, i) => sum + (x - mx) * (scores[i] - my), 0) /
+             hours.reduce((sum, x) => sum + Math.pow(x - mx, 2), 0);
+  const b  = my - m * mx;
+
+  document.getElementById('rPearson').textContent  = r.toFixed(4);
+  document.getElementById('rSquared').textContent  = r2.toFixed(4);
+  document.getElementById('rEquation').textContent =
+    `score = ${m.toFixed(2)}·hrs + ${b.toFixed(2)}`;
+}
+
+/**
+ * STUDENT 2: Visualization Engine
+ */
+function initCharts() {
+  drawBarChart('barChart', window.DS);
+  drawPieChart('pieChart', window.DS);
+  drawScatterChart('scatterChart', window.DS);
+  drawHistChart('histChart', window.DS);
+}
+
+function drawBarChart(id, data) {
+  const ctx = document.getElementById(id).getContext('2d');
+  if (window.CHARTS[id]) window.CHARTS[id].destroy();
+  
+  window.CHARTS[id] = new Chart(ctx, {
+=======
 function drawBarChart(canvasId, data) {
   if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
 
@@ -945,40 +1054,83 @@ function drawBarChart(canvasId, data) {
   const ctx = document.getElementById(canvasId).getContext('2d');
 
   window.CHARTS[canvasId] = new Chart(ctx, {
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
     type: 'bar',
     data: {
-      labels,
+      labels: data.slice(0, 10).map(s => s.student_id),
+      datasets: [{ label: 'Score', data: data.slice(0, 10).map(s => s.score), backgroundColor: '#f0b429cc' }]
+    },
+    options: { responsive: true, scales: { y: { beginAtZero: true, grid: { color: '#2a2f45' } } } }
+  });
+}
+
+/**
+ * FIX 2: Pie chart grade counting — replaced hardcoded { A:0, B:0, C:0, D:0, F:0 }
+ *         with a dynamic counter that builds keys from actual data.
+ *         The old version used counts[s.grade]++ which silently skipped any grade
+ *         not pre-declared in the object (e.g. lowercase, unexpected values),
+ *         resulting in all zeros / incorrect distribution.
+ */
+function drawPieChart(id, data) {
+  const ctx = document.getElementById(id).getContext('2d');
+
+  // Dynamically tally grades from actual data instead of assuming fixed keys
+  const counts = {};
+  data.forEach(s => {
+    const g = s.grade || 'Unknown';
+    counts[g] = (counts[g] || 0) + 1;
+  });
+
+  // Sort keys alphabetically for consistent legend order
+  const sortedKeys = Object.keys(counts).sort();
+  const sortedValues = sortedKeys.map(k => counts[k]);
+
+  const palette = ['#56d364','#f0b429','#3ecfcf','#e05c6a','#ea4335','#a78bfa','#fb923c','#38bdf8'];
+
+  if (window.CHARTS[id]) window.CHARTS[id].destroy();
+  window.CHARTS[id] = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: sortedKeys,
       datasets: [{
-        label: 'Final Score',
-        data: scores,
-        backgroundColor: 'rgba(240,180,41,0.80)',
-        borderColor:     'rgba(240,180,41,1)',
-        borderWidth: 1,
-        borderRadius: 3,
+        data: sortedValues,
+        backgroundColor: sortedKeys.map((_, i) => palette[i % palette.length])
+      }]
+    }
+  });
+}
+
+/**
+ * FIX 3: Scatter chart — Attendance % vs Final Score (was never implemented)
+ */
+function drawScatterChart(id, data) {
+  const ctx = document.getElementById(id).getContext('2d');
+  if (window.CHARTS[id]) window.CHARTS[id].destroy();
+
+  const points = data.map(s => ({ x: s.attendance, y: s.score }));
+
+  window.CHARTS[id] = new Chart(ctx, {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Attendance vs Score',
+        data: points,
+        backgroundColor: '#3ecfcfaa',
+        pointRadius: 4
       }]
     },
     options: {
-      ...defaults,
-      plugins: {
-        ...defaults.plugins,
-        legend: { ...defaults.plugins.legend, display: true },
-        tooltip: {
-          ...defaults.plugins.tooltip,
-          callbacks: {
-            title: (items) => {
-              const idx = items[0].dataIndex;
-              return `${sorted[idx].name} (${sorted[idx].studyHours} hrs/wk)`;
-            },
-            label: (item) => ` Final Score: ${item.raw}`,
-          }
-        }
-      },
+      responsive: true,
       scales: {
-        x: { ...defaults.scales.x, title: { display: true, text: 'Student (sorted by study hours ↑)', color: '#6b748f', font: { family: 'Courier Prime', size: 10 } } },
-        y: { ...defaults.scales.y, min: 0, max: 100, title: { display: true, text: 'Final Score', color: '#6b748f', font: { family: 'Courier Prime', size: 10 } } }
+        x: { title: { display: true, text: 'Attendance %', color: '#6b748f' }, grid: { color: '#2a2f45' } },
+        y: { title: { display: true, text: 'Final Score',  color: '#6b748f' }, grid: { color: '#2a2f45' } }
       }
     }
   });
+<<<<<<< HEAD
+}
+
+=======
 
   document.getElementById('barPlaceholder').style.display = 'none';
   document.getElementById(canvasId).style.display = 'block';
@@ -988,15 +1140,29 @@ function drawBarChart(canvasId, data) {
 
 /* ─── COMMIT 2 ── "feat: implement drawScatterPlot attendance vs score" ─ */
 
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
 /**
- * drawScatterPlot(canvasId, data) — Student 2, commit 2/5
- *
- * PURPOSE: Scatter plot — Attendance % (x) vs Final Score (y).
- *          Each point = one student. Includes a linear regression trend line.
- *
- * @param {string} canvasId - 'scatterChart'
- * @param {Array}  data     - window.DS array
+ * FIX 4: Histogram — Final Score Distribution (was never implemented)
  */
+<<<<<<< HEAD
+function drawHistChart(id, data) {
+  const ctx = document.getElementById(id).getContext('2d');
+  if (window.CHARTS[id]) window.CHARTS[id].destroy();
+
+  const scores = data.map(s => s.score);
+  const min = Math.floor(Math.min(...scores) / 10) * 10;
+  const max = Math.ceil(Math.max(...scores) / 10) * 10;
+  const binSize = 10;
+  const bins = [];
+  const counts = [];
+
+  for (let lo = min; lo < max; lo += binSize) {
+    bins.push(`${lo}–${lo + binSize}`);
+    counts.push(scores.filter(s => s >= lo && s < lo + binSize).length);
+  }
+
+  window.CHARTS[id] = new Chart(ctx, {
+=======
 function drawScatterPlot(canvasId, data) {
   if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
 
@@ -1103,42 +1269,44 @@ function drawHistogram(canvasId, data) {
   const ctx = document.getElementById(canvasId).getContext('2d');
 
   window.CHARTS[canvasId] = new Chart(ctx, {
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
     type: 'bar',
     data: {
-      labels: binLabels,
+      labels: bins,
       datasets: [{
         label: 'Students',
         data: counts,
-        backgroundColor: 'rgba(224,92,106,0.75)',
-        borderColor:     'rgba(224,92,106,1)',
-        borderWidth: 1,
-        borderRadius: 2,
-        barPercentage: 1.0,
-        categoryPercentage: 1.0,
+        backgroundColor: '#e05c6acc',
+        borderRadius: 4
       }]
     },
     options: {
-      ...defaults,
-      plugins: {
-        ...defaults.plugins,
-        legend: { display: false },
-        tooltip: {
-          ...defaults.plugins.tooltip,
-          callbacks: {
-            label: (item) => ` ${item.raw} student${item.raw !== 1 ? 's' : ''}`
-          }
-        }
-      },
+      responsive: true,
+      plugins: { legend: { display: false } },
       scales: {
-        x: { ...defaults.scales.x, title: { display: true, text: 'Score Range', color: '#6b748f', font: { family: 'Courier Prime', size: 10 } } },
-        y: {
-          ...defaults.scales.y,
-          ticks: { ...defaults.scales.y.ticks, stepSize: 1, precision: 0 },
-          title: { display: true, text: 'Count', color: '#6b748f', font: { family: 'Courier Prime', size: 10 } }
-        }
+        x: { title: { display: true, text: 'Score Range', color: '#6b748f' }, grid: { color: '#2a2f45' } },
+        y: { title: { display: true, text: 'Count',       color: '#6b748f' }, grid: { color: '#2a2f45' }, beginAtZero: true }
       }
     }
   });
+<<<<<<< HEAD
+}
+
+
+  const filter = document.getElementById('filterInput').value.toLowerCase();
+  const filtered = window.DS.filter(s => String(s.student_id).toLowerCase().includes(filter));
+  renderTable(filtered);
+
+function resetTable() {
+  document.getElementById('filterInput').value = '';
+  renderTable(window.DS);
+}
+
+document.addEventListener('DOMContentLoaded', loadDataset);
+</script>
+</body>
+</html>
+=======
 
   document.getElementById('histPlaceholder').style.display = 'none';
   document.getElementById(canvasId).style.display = 'block';
@@ -1551,3 +1719,4 @@ function renderStats(data) {
 
 </body>
 </html>
+>>>>>>> c3fc35b984961b861b8e50942991386104671089
