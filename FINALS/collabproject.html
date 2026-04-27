@@ -1297,12 +1297,47 @@ function drawHistogram(canvasId, data) {
  *  - Cutout: '55%' for doughnut style
  */
 function drawPieChart(canvasId, data) {
-  // TODO: Implement this function
-  // After implementing, show the canvas:
-  // document.getElementById('piePlaceholder').style.display = 'none';
-  // document.getElementById(canvasId).style.display = 'block';
+  /*
+   * Purpose: Displays the overall proportion of each letter grade awarded to the class.
+   * Display: A doughnut chart with a 55% center cutout utilizing distinct categorical colors.
+   * How it works: Aggregates the dataset by grade type. Calculates percentage in the tooltip callback based on total dataset length.
+   */
+  if (window.CHARTS[canvasId]) window.CHARTS[canvasId].destroy();
 
-  console.warn("⚠ Student 2: drawPieChart() is not yet implemented.");
+  const counts = { A: 0, B: 0, C: 0, D: 0 };
+  data.forEach(d => {
+    if(counts[d.grade] !== undefined) counts[d.grade]++;
+  });
+
+  const total = data.length;
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  const options = getChartDefaults();
+  options.cutout = '55%';
+  delete options.scales; // No axes for pie charts
+  
+  options.plugins.tooltip.callbacks = {
+    label: function(context) {
+      let val = context.raw;
+      let percentage = ((val / total) * 100).toFixed(1);
+      return `${context.label}: ${val} students (${percentage}%)`;
+    }
+  };
+
+  window.CHARTS[canvasId] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['A', 'B', 'C', 'D'],
+      datasets: [{
+        data: [counts.A, counts.B, counts.C, counts.D],
+        backgroundColor: ['#56d364', '#f0b429', '#3ecfcf', '#e05c6a'],
+        borderWidth: 0
+      }]
+    },
+    options: options
+  });
+
+  document.getElementById('piePlaceholder').style.display = 'none';
+  document.getElementById(canvasId).style.display = 'block';
 }
 
 /**
