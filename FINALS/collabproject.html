@@ -1377,6 +1377,44 @@ function pearsonCorr(x, y) {
   return parseFloat((num / denom).toFixed(4));
 }
 
+/* ─── COMMIT 4 ── "feat: implement linear regression with R-squared" ─ */
+
+/**
+ * linearRegression(x, y) — Student 3, commit 4/5
+ *
+ * PURPOSE: Simple linear regression — find the best-fit line y = mx + b.
+ *
+ * @param  {number[]} x - Independent variable values
+ * @param  {number[]} y - Dependent variable values
+ * @returns {{ slope: number, intercept: number, rSquared: number }}
+ *
+ * FORMULAS:
+ *   m (slope)     = Σ((xᵢ−x̄)(yᵢ−ȳ)) / Σ(xᵢ−x̄)²
+ *   b (intercept) = ȳ − m·x̄
+ *   R²            = r²  (Pearson r squared)
+ *
+ * ROUND: slope and intercept to 4 decimal places; R² to 4 decimal places.
+ *
+ * EXAMPLE OUTPUT: { slope: 2.1, intercept: 45.3, rSquared: 0.87 }
+ */
+function linearRegression(x, y) {
+  if (!x || !y || x.length !== y.length || x.length === 0) {
+    return { slope: 0, intercept: 0, rSquared: 0 };
+  }
+  const xBar = mean(x);
+  const yBar = mean(y);
+  let num = 0, denom = 0;
+  for (let i = 0; i < x.length; i++) {
+    num   += (x[i] - xBar) * (y[i] - yBar);
+    denom += Math.pow(x[i] - xBar, 2);
+  }
+  const slope     = denom === 0 ? 0 : parseFloat((num / denom).toFixed(4));
+  const intercept = parseFloat((yBar - slope * xBar).toFixed(4));
+  const r         = pearsonCorr(x, y);
+  const rSquared  = parseFloat((r * r).toFixed(4));
+  return { slope, intercept, rSquared };
+}
+
 
 /* ─────────────────────────────────────────────────────────────────
    END OF STUDENT CONTRIBUTION ZONES
