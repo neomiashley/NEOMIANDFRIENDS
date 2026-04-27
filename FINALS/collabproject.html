@@ -793,11 +793,11 @@ window.DS    = [];
 window.CHARTS = {};
 
 function onDataReady() {
-  // Student 2 — commit 5: wire initCharts
-  initCharts();
-
   // Student 3 — commit 5: wire renderStats
   renderStats(window.DS);
+
+  // Student 2 — commit 5: wire initCharts
+  initCharts();
 
   console.log("✅ onDataReady() fired. window.DS has", window.DS.length, "rows.");
 }
