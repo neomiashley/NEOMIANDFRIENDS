@@ -1339,7 +1339,19 @@ function variance(arr) {
   return parseFloat((sumSq / arr.length).toFixed(2));
 }
 
-/* ─── COMMIT 3 ── "feat: implement Pearson correlation coefficient" ── */
+/**
+ * stdDev(arr) — Student 3, commit 2/5
+ *
+ * PURPOSE: Compute the standard deviation (square root of variance).
+ *
+ * @param  {number[]} arr - Array of numbers
+ * @returns {number}       Standard deviation σ, rounded to 2 decimal places
+ *
+ * FORMULA: σ = √σ²
+ */
+function stdDev(arr) {
+  return parseFloat(Math.sqrt(variance(arr)).toFixed(2));
+}
 
 /**
  * pearsonCorr(x, y) — Student 3, commit 3/5
@@ -1415,6 +1427,78 @@ function linearRegression(x, y) {
   return { slope, intercept, rSquared };
 }
 
+/* ─── COMMIT 5 ── "feat: wire renderStats to display results in the DOM" */
+
+/**
+ * renderStats(data) — Student 3, commit 5/5
+ *
+ * PURPOSE: Compute all statistics from data and update the DOM.
+ *          Called from onDataReady() after Student 1 loads the dataset.
+ *
+ * @param {Array} data - window.DS array
+ *
+ * DOM ELEMENTS UPDATED:
+ *   #statMean, #statMedian, #statStdDev, #statMode  — summary cards
+ *   #dCount, #dMin, #dMax, #dRange, #dVariance, #dStdDev — descriptive stats
+ *   #rPearson, #rInterp, #rSlope, #rIntercept, #rSquared, #rEquation — regression
+ */
+function renderStats(data) {
+  try {
+    // 1. Extract arrays
+    const scores = data.map(d => d.score);
+    const hours  = data.map(d => d.studyHours);
+
+    // 2. Compute descriptive stats
+    const mn  = mean(scores);
+    const med = median(scores);
+    const sd  = stdDev(scores);
+    const md  = mode(scores);
+    const vr  = variance(scores);
+    const minS = Math.min(...scores);
+    const maxS = Math.max(...scores);
+
+    // 3. Compute correlation & regression
+    const r   = pearsonCorr(hours, scores);
+    const reg = linearRegression(hours, scores);
+
+    // 4. Interpretation: |r| ≥ 0.7 Strong, ≥ 0.4 Moderate, < 0.4 Weak
+    const absR     = Math.abs(r);
+    const strength = absR >= 0.7 ? "Strong" : absR >= 0.4 ? "Moderate" : "Weak";
+    const direction = r >= 0 ? "Positive" : "Negative";
+    const interp   = `${strength} ${direction} Correlation`;
+
+    // 5. Equation string
+    const sign     = reg.intercept >= 0 ? "+" : "−";
+    const absIntercept = Math.abs(reg.intercept).toFixed(2);
+    const equation = `score = ${reg.slope.toFixed(2)}·hours ${sign} ${absIntercept}`;
+
+    // 6. Update summary cards
+    document.getElementById('statMean').textContent   = mn;
+    document.getElementById('statMedian').textContent = med;
+    document.getElementById('statStdDev').textContent = sd;
+    document.getElementById('statMode').textContent   = md;
+
+    // 7. Update descriptive table
+    document.getElementById('dCount').textContent    = scores.length;
+    document.getElementById('dMin').textContent      = minS;
+    document.getElementById('dMax').textContent      = maxS;
+    document.getElementById('dRange').textContent    = maxS - minS;
+    document.getElementById('dVariance').textContent = vr;
+    document.getElementById('dStdDev').textContent   = sd;
+
+    // 8. Update regression table
+    document.getElementById('rPearson').textContent   = r;
+    document.getElementById('rInterp').textContent    = interp;
+    document.getElementById('rSlope').textContent     = reg.slope;
+    document.getElementById('rIntercept').textContent = reg.intercept;
+    document.getElementById('rSquared').textContent   = reg.rSquared;
+    document.getElementById('rEquation').textContent  = equation;
+
+    console.log("✅ Student 3: renderStats() complete.");
+  } catch (err) {
+    console.error("❌ Student 3 renderStats() error:", err);
+  }
+}
 
 /* ─────────────────────────────────────────────────────────────────
    END OF STUDENT CONTRIBUTION ZONES
